@@ -1,0 +1,19 @@
+public interface Enemy {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
