@@ -8,13 +8,13 @@ public class Player {
 
 PVector position = new PVector();
 PVector velocity = new PVector();
-    PVector attackZonePos = new PVector(50,50);
 
 PApplet p;
 int playerWidth = 10;
 int playerHeight=10;
 boolean down,up,left,right = false;
 boolean ready = true;
+boolean attackZones = false;
 
 Player(PApplet p){
     this.p = p;
@@ -33,38 +33,34 @@ p.println(p.width);
 
 
     void draw(){
+
         changePosition();
         p.rect(position.x,position.y,playerWidth,playerHeight);
-        changePosition();
+        if(ready==false){
+            if(attackZones) {
+
+            }else{
+
+
+
+            }
+
+
+        }
        // if(AttackZone)
        // p.rect(position.x+playerWidth,position.y+playerHeight,position.x+attackZonePos.x,position.y,attackZonePos.y);
     }
 
-    void attack(int attackType){
-    /*1 = punch
 
 
-
-    */
-
-
-    if(attackType== 1){
-       // createAttackZone();
-
-    }
-
-
-
-    }
-
-/*
-createAttackZone(){
-
-    //attackZones = true;
-
+void createAttackZone(int attackType){
+//1 = punch
+    AttackZone attackZone = new AttackZone(attackType,p,position,playerWidth);
+    attackZone.createAttackZone();
+    attackZones = true;
 
 }
-*/
+
 
 
 
@@ -74,10 +70,10 @@ void controls(char key, int keyCode,  boolean pressed){
     if (key != p.CODED)
     switch(key){
 
-        case 'f':{
+        case 'j':{
             if(ready) {
                 ready = false;
-                attack(1);
+                createAttackZone(1);
 
             }
         }
