@@ -24,8 +24,8 @@ public class BeatEmUp extends PApplet {
 
     @Override
     public void draw() {
-
     player.draw();
+
 
     }
     public void keyPressed(){

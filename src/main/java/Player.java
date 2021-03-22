@@ -10,11 +10,14 @@ PVector position = new PVector();
 PVector velocity = new PVector();
 
 PApplet p;
-int playerWidth = 10;
-int playerHeight=10;
+int playerWidth = 100;
+int playerHeight=200;
+int counter = 0;
 boolean down,up,left,right = false;
 boolean ready = true;
 boolean attackZones = false;
+boolean continueAttack = false;
+int attackNumber = 0;
 
 Player(PApplet p){
     this.p = p;
@@ -31,14 +34,35 @@ p.println(p.width);
     position.y=  p.constrain(position.y,0,p.height-playerHeight);
 }
 
+void display(){
+    p.rectMode(0);
+    p.rect(position.x,position.y,playerWidth,playerHeight);
+
+}
+
+void finishAttack(){
+    if(counter >= 50){
+        if (continueAttack == false)
+        ready=true;
+
+    }
+    else{
+        counter ++;
+        if(counter >= 25)
+            damage = true;
+    }
+
+}
 
     void draw(){
 
+
         changePosition();
-        p.rect(position.x,position.y,playerWidth,playerHeight);
+        display();
+
         if(ready==false){
             if(attackZones) {
-
+finishAttack();
             }else{
 
 
@@ -55,7 +79,7 @@ p.println(p.width);
 
 void createAttackZone(int attackType){
 //1 = punch
-    AttackZone attackZone = new AttackZone(attackType,p,position,playerWidth);
+    AttackZone attackZone = new AttackZone(attackType,p,position,playerWidth,playerHeight);
     attackZone.createAttackZone();
     attackZones = true;
 
@@ -74,6 +98,11 @@ void controls(char key, int keyCode,  boolean pressed){
             if(ready) {
                 ready = false;
                 createAttackZone(1);
+                velocity.set(0,0);
+            }
+            else if( attackNumber<= 5){
+                continueAttack=true;
+                attackNumber ++;
 
             }
         }
