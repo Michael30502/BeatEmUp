@@ -13,11 +13,16 @@ PApplet p;
 int playerWidth = 100;
 int playerHeight=200;
 int counter = 0;
+int attackNumber = 0;
+
 boolean down,up,left,right = false;
 boolean ready = true;
 boolean attackZones = false;
 boolean continueAttack = false;
-int attackNumber = 0;
+boolean damage =false;
+boolean moveAble = true;
+boolean check = false;
+
 
 Player(PApplet p){
     this.p = p;
@@ -27,9 +32,8 @@ position.set(100,this.p.height/2);
 
 
 void changePosition(){
-
-position.add(velocity);
-p.println(p.width);
+    float temp = ready?  1 : (float)0.5;
+    position.add(velocity.x*temp,velocity.y*temp);
     position.x =p.constrain(position.x,0,p.width-playerWidth);
     position.y=  p.constrain(position.y,0,p.height-playerHeight);
 }
@@ -41,15 +45,30 @@ void display(){
 }
 
 void finishAttack(){
+    System.out.println(counter);
     if(counter >= 50){
-        if (continueAttack == false)
-        ready=true;
+        if (continueAttack == false) {
+            ready = true;
+            attackZones = false;
+            attackNumber= 0;
+            counter = 0;
+            moveAble = true;
+            damage = false;
 
+        }else{
+            counter = 0;
+            attackNumber ++;
+            continueAttack = false;
+            damage = false;
+
+        }
     }
     else{
         counter ++;
-        if(counter >= 25)
+        if(counter >= 25) {
             damage = true;
+
+        }
     }
 
 }
@@ -80,7 +99,7 @@ finishAttack();
 void createAttackZone(int attackType){
 //1 = punch
     AttackZone attackZone = new AttackZone(attackType,p,position,playerWidth,playerHeight);
-    attackZone.createAttackZone();
+    attackZone.displayAttackZone();
     attackZones = true;
 
 }
@@ -95,20 +114,23 @@ void controls(char key, int keyCode,  boolean pressed){
     switch(key){
 
         case 'j':{
-            if(ready) {
+            if (check)
+            if(ready && pressed) {
+                check = false;
                 ready = false;
                 createAttackZone(1);
                 velocity.set(0,0);
-            }
-            else if( attackNumber<= 5){
+            } else if( attackNumber<= 5 && continueAttack == false){
+                check = false;
                 continueAttack=true;
-                attackNumber ++;
-
+                System.out.println("Bruh");
             }
-        }
+            if (pressed == false)
+                check = true;
+        }break;
 
         case 's': {
-            if((pressed) &&(ready))
+            if((pressed) &&(moveAble))
             down=true;
             else{
                 down=false;}
@@ -116,21 +138,21 @@ void controls(char key, int keyCode,  boolean pressed){
         }break;
 
         case 'w': {
-            if((pressed) &&(ready))
+            if((pressed) &&(moveAble))
             up = true;
             else
                 up=false;
 
         }break;
         case 'a': {
-            if((pressed) &&(ready))
+            if((pressed) &&(moveAble))
             left=true;
             else
                 left=false;
 
         }break;
         case 'd': {
-            if((pressed) &&(ready))
+            if((pressed) &&(moveAble))
             right=true;
             else
                 right=false;
@@ -143,7 +165,7 @@ else{
     switch (keyCode){
 
         case DOWN: {
-            if((pressed) &&(ready))
+            if((pressed) &&(moveAble))
             down=true;
             else{
                 down=false;}
@@ -151,14 +173,14 @@ else{
         }break;
 
         case UP: {
-            if((pressed) &&(ready))
+            if((pressed) &&(moveAble))
                 up=true;
             else{
                 up=false;}
 
         }break;
         case RIGHT: {
-            if((pressed) &&(ready))
+            if((pressed) &&(moveAble))
                 right=true;
             else{
                 right=false;}
@@ -166,7 +188,7 @@ else{
 
         }break;
         case LEFT: {
-            if((pressed) &&(ready))
+            if((pressed) &&(moveAble))
                 left=true;
             else{
                 left=false;}
@@ -178,7 +200,9 @@ else{
 
 
     }
-    velocity.set(((right)?1:0) +((left)?-1:0),(((up)?-1:0) +((down)?1:0)));
+
+p.println("bruh");
+    velocity.set((((right)?1:0) +((left)?-1:0)) ,(((up)?-1:0) +((down)?1:0)));
 }
 
 

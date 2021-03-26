@@ -17,10 +17,15 @@ public class AttackZone {
     }
 
     void createAttackZone(){
+
+
+
+    }
+
+    void displayAttackZone(){
+
         p.rectMode(0);
-    p.rect(position.x+playerWidth,position.y+(playerHeight/5),50,50);
-
-
+        p.rect(position.x+playerWidth,position.y+(playerHeight/5),50,50);
     }
 
 
