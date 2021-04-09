@@ -39,7 +39,7 @@ void changePosition(){
 }
 
 void display(){
-    p.rectMode(0);
+
     p.rect(position.x,position.y,playerWidth,playerHeight);
 
 }

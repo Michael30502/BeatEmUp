@@ -29,9 +29,11 @@ NEnemy(PApplet p){
         float angle = (float)Math.atan2(diffY, diffX);
         velocity.x = (float) (1 * Math.cos(angle));
         velocity.y = (float) (1 * Math.sin(angle));
+        if(collision(s.position.x,s.position.y,s.position.x+s.playerWidth,s.playerHeight,position.x,position.y,sizeX,sizeY)){
+            velocity = new PVector(0,0);
+        }
 
-
-       p.println(s.position.x);
+       p.println(collision(s.position.x,s.position.y,s.position.x+s.playerWidth,s.playerHeight,position.x,position.y,sizeX,sizeY));
     position.add(velocity);
 
     }
