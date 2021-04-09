@@ -7,7 +7,7 @@ public class BeatEmUp extends PApplet {
     }
 
     Player player = new Player(this);
-
+    NEnemy nEnemy = new NEnemy(this);
 
     @Override
     public void setup() {
@@ -25,6 +25,8 @@ public class BeatEmUp extends PApplet {
     @Override
     public void draw() {
         clear();
+        nEnemy.display();
+        nEnemy.move(player);
     player.draw();
 
 

@@ -3,7 +3,7 @@ public interface Enemy {
 
     void attack(Player p);
 
-    void move();
+    void move(Player p);
 
 
 }

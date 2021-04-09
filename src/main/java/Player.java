@@ -10,8 +10,8 @@ PVector position = new PVector();
 PVector velocity = new PVector();
 
 PApplet p;
-int playerWidth = 100;
-int playerHeight=200;
+int playerWidth = 50;
+int playerHeight=100;
 int counter = 0;
 int attackNumber = 0;
 
@@ -32,7 +32,7 @@ position.set(100,this.p.height/2);
 
 
 void changePosition(){
-    float temp = ready?  1 : (float)0.5;
+    float temp = ready?  5 : (float)0.5;
     position.add(velocity.x*temp,velocity.y*temp);
     position.x =p.constrain(position.x,0,p.width-playerWidth);
     position.y=  p.constrain(position.y,0,p.height-playerHeight);
