@@ -14,6 +14,7 @@ int playerWidth = 50;
 int playerHeight=100;
 int counter = 0;
 int attackNumber = 0;
+int frame = 0;
 
 boolean down,up,left,right = false;
 boolean ready = true;
@@ -204,6 +205,9 @@ else{
 p.println("bruh");
     velocity.set((((right)?1:0) +((left)?-1:0)) ,(((up)?-1:0) +((down)?1:0)));
 }
+
+
+
 
 
 

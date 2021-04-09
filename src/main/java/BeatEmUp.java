@@ -9,9 +9,12 @@ public class BeatEmUp extends PApplet {
     Player player = new Player(this);
     NEnemy nEnemy = new NEnemy(this);
 
+    ImageLoader imgLoad = new ImageLoader(this);
+
     @Override
     public void setup() {
         super.setup();
+        imgLoad.loadImage();
 
 
     }
