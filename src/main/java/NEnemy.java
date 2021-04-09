@@ -29,7 +29,7 @@ NEnemy(PApplet p){
         float angle = (float)Math.atan2(diffY, diffX);
         velocity.x = (float) (1 * Math.cos(angle));
         velocity.y = (float) (1 * Math.sin(angle));
-       
+
 
        p.println(s.position.x);
     position.add(velocity);
