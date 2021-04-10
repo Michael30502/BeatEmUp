@@ -32,7 +32,8 @@ public class BeatEmUp extends PApplet {
         clear();
         nEnemy.display();
         nEnemy.move(player);
-    player.draw();
+        player.draw();
+        nEnemy.hit(player);
 
 
     }
