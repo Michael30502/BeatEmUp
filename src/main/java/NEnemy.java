@@ -6,7 +6,9 @@ public class NEnemy extends Collision implements Enemy{
 PApplet p;
 PVector position = new PVector();
 PVector velocity = new PVector(0,0);
-float sizeX = 50,sizeY=50;
+float sizeX = 50,sizeY=100;
+    float angleRight;
+    float angleLeft;
 NEnemy(PApplet p){
     this.p = p;
     position.set(600,600);
@@ -23,17 +25,27 @@ NEnemy(PApplet p){
 
     @Override
     public void move(Player s) {
-      float diffX = s.position.x -position.x;
+      float diffXRight = s.position.x+s.playerWidth -position.x;
       float diffY = s.position.y - position.y;
+      float diffXLeft= s.position.x -position.x;
 
-        float angle = (float)Math.atan2(diffY, diffX);
-        velocity.x = (float) (1 * Math.cos(angle));
-        velocity.y = (float) (1 * Math.sin(angle));
-        if(collision(s.position.x,s.position.y,s.position.x+s.playerWidth,s.playerHeight,position.x,position.y,sizeX,sizeY)){
-            velocity = new PVector(0,0);
+      angleRight = (float) Math.atan2(diffY, diffXRight);
+      angleLeft = (float) Math.atan2(diffY, diffXLeft);
+        if(angleRight<angleLeft) {
+            velocity.x = (float) (1 * Math.cos(angleRight));
+            velocity.y = (float) (1 * Math.sin(angleRight));
+        }
+        if(angleRight>angleLeft) {
+            velocity.x = (float) (1 * Math.cos(angleLeft));
+            velocity.y = (float) (1 * Math.sin(angleLeft));
         }
 
-       p.println(collision(s.position.x,s.position.y,s.position.x+s.playerWidth,s.playerHeight,position.x,position.y,sizeX,sizeY));
+        if(collisionBetweenEnemyAndPlayer(s.position.x,s.position.y,s.playerWidth,s.playerHeight,position.x,position.y,sizeX,sizeY)){
+            velocity = new PVector(0,0);
+        }
+        p.println("right"+diffXRight);
+        p.println("left"+diffXLeft);
+   //    p.println(collisionBetweenEnemyAndPlayer(s.position.x,s.position.y,s.position.x+s.playerWidth,s.playerHeight,position.x,position.y,sizeX,sizeY));
     position.add(velocity);
 
     }
