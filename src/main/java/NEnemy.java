@@ -70,7 +70,7 @@ NEnemy(PApplet p){
                 }
             }
         }
-        if(health<0){
+        if(health<=0){
             position.x =5000;
         }
     }
