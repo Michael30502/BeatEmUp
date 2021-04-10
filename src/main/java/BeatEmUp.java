@@ -13,7 +13,7 @@ public class BeatEmUp extends PApplet {
     ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
     Player player = new Player(this,imgLoad);
     NEnemy nEnemy = new NEnemy(this,new PVector(500,500));
-
+    EnemySpawnManager enemySpawnManager;
 
 
     @Override
@@ -36,6 +36,8 @@ public class BeatEmUp extends PApplet {
     public void draw() {
         clear();
       //  player.hit();
+        player.draw();
+
         for(int i = 0; i<enemyList.size();++i ) {
             NEnemy nEnemy = (NEnemy) enemyList.get(i);
             nEnemy.display();
