@@ -8,11 +8,11 @@ public class BeatEmUp extends PApplet {
     public static void main(String[] args ) {
         PApplet.main("BeatEmUp");
     }
-
+    EnemySpawnManager enemySpawnManager;
     ImageLoader imgLoad = new ImageLoader(this);
     ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
     Player player = new Player(this,imgLoad);
-    NEnemy nEnemy = new NEnemy(this,new PVector(500,500));
+
 
 
 
@@ -20,6 +20,8 @@ public class BeatEmUp extends PApplet {
     public void setup() {
         super.setup();
         imgLoad.loadImage();
+        enemySpawnManager = new EnemySpawnManager(this, enemyList);
+        enemySpawnManager.spawnEnemy();
 
 
     }
@@ -33,11 +35,13 @@ public class BeatEmUp extends PApplet {
     @Override
     public void draw() {
         clear();
-        nEnemy.display();
-        nEnemy.move(player);
-        player.draw();
-        nEnemy.hit(player);
-
+        for(int i = 0; i<enemyList.size();++i ) {
+            NEnemy nEnemy = (NEnemy) enemyList.get(i);
+            nEnemy.display();
+            nEnemy.move(player);
+            nEnemy.hit(player);
+        }
+        enemySpawnManager.spawnEnemy();
 
     }
     public void keyPressed(){

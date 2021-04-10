@@ -23,7 +23,7 @@ float sizeX = 50,sizeY=100;
 NEnemy(PApplet p,PVector position){
     this.position = position;
     this.p = p;
-    position.set(600,600);
+
 }
     @Override
     public void display() {
