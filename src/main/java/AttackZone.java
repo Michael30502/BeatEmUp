@@ -36,13 +36,6 @@ public class AttackZone {
     void displayAttackZone(boolean damage,PVector velocity){
 
         zonePosition.add(velocity);
-        zonePosition.add(velocity);
-        zonePosition.add(velocity);
-        zonePosition.add(velocity);
-        zonePosition.add(velocity);
-        zonePosition.add(velocity);
-        zonePosition.add(velocity);
-
 
        if(damage)
         p.fill(255,0,0);

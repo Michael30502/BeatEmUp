@@ -12,7 +12,9 @@ ImageLoader imgLoad;
 
 PVector position = new PVector();
 PVector velocity = new PVector();
-AttackZone attackZone;
+
+ArrayList<AttackZone> attackZoneArray = new ArrayList<>();
+
 PApplet p;
 
 ArrayList<PImage> currentImages;
@@ -49,7 +51,7 @@ void changeSprites() {
         scale = -1;
 
     if (attackZones == true) {
-        switch (attackZone.attackType) {
+        switch (attackZoneArray.get(0).attackType) {
             case 1: {
                 if (currentImages != imgLoad.punchCombo){
                 currentImages = imgLoad.punchCombo;
@@ -97,8 +99,12 @@ if(frame> currentImages.size()-1){
 }
 
 
-if(attackZones)
-    attackZone.displayAttackZone(damage,velocity);
+if(attackZones) {
+    for(int i =0;i< attackZoneArray.size();i++) {
+        attackZoneArray.get(i).displayAttackZone(damage, velocity);
+
+    }
+}
 }
 
 void finishAttack(){
@@ -110,7 +116,7 @@ void finishAttack(){
             coolDown = 25+attackNumber*10;
             attackNumber = 0;
             moveAble = true;
-
+            attackZoneArray.clear();
 
         }else{
 
@@ -124,7 +130,7 @@ void finishAttack(){
     }
     else{
         counter ++;
-        if(counter >= 25) {
+        if(counter >= 30) {
             damage = true;
 
         }
@@ -156,7 +162,7 @@ p.println(coolDown);
 
 void createAttackZone(int attackType){
 //1 = punch
-    attackZone = new AttackZone(attackType,p,position,playerWidth,playerHeight,scale);
+    attackZoneArray.add(0,new AttackZone(attackType,p,position,playerWidth,playerHeight,scale));
     attackZones = true;
 
 }
