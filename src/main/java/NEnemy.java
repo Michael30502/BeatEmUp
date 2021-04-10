@@ -19,7 +19,9 @@ float sizeX = 50,sizeY=100;
     int health = 100;
     int timer = 30;
     int scale = -1;
-
+    float diffXRight;
+    float diffY;
+    float diffXLeft;
 
     boolean attackZones = false;
 
@@ -56,9 +58,9 @@ NEnemy(PApplet p,PVector position){
 
     @Override
     public void move(Player s) {
-      float diffXRight = s.position.x+s.playerWidth -position.x;
-      float diffY = s.position.y - position.y;
-      float diffXLeft= s.position.x -position.x;
+       diffXRight = s.position.x+s.playerWidth -position.x;
+       diffY = s.position.y - position.y;
+      diffXLeft= s.position.x -position.x;
 
       angleRight = (float) Math.atan2(diffY, diffXRight);
       angleLeft = (float) Math.atan2(diffY, diffXLeft);

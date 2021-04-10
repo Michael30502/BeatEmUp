@@ -43,6 +43,12 @@ public class BeatEmUp extends PApplet {
             nEnemy.display();
             nEnemy.move(player);
             nEnemy.hit(player);
+          if(nEnemy.angleLeft< ((NEnemy) enemyList.get(i)).angleLeft||nEnemy.angleRight<((NEnemy) enemyList.get(i)).angleRight){
+
+
+
+          }
+            println(((NEnemy) enemyList.get(i)).angleLeft);
             if(nEnemy.dead){
                 enemyList.remove(i);
                 i = i-1;
