@@ -12,7 +12,7 @@ ImageLoader imgLoad;
 
 PVector position = new PVector();
 PVector velocity = new PVector();
-
+AttackZone attackZone;
 PApplet p;
 
 ArrayList<PImage> currentImages;
@@ -23,6 +23,7 @@ int counter = 0;
 int attackNumber = 0;
 int scale = 1;
 
+float coolDown = 0;
 float frame = 0;
 
 boolean down,up,left,right = false;
@@ -41,13 +42,41 @@ this.imgLoad = imgLoad;
 currentImages = imgLoad.movement;
 }
 
+void changeSprites() {
+    if (velocity.x > 0 && attackZones == false)
+        scale = 1;
+    if (velocity.x < 0 && attackZones == false)
+        scale = -1;
+
+    if (attackZones == true) {
+        switch (attackZone.attackType) {
+            case 1: {
+                if (currentImages != imgLoad.punchCombo){
+                currentImages = imgLoad.punchCombo;
+                frame = 0;}
+
+            }
+            break;
+            case 2: {
+                frame = 0;
+
+            }
+            break;
+        }
+    } else if (velocity.x == 0 && velocity.y == 0) {
+        if (currentImages != imgLoad.idle){
+        currentImages = imgLoad.idle;
+        frame = 0;}
+    } else {
+        if (currentImages != imgLoad.movement){
+        currentImages = imgLoad.movement;
+        frame = 0;}
+    }
+}
 
 void changePosition(){
     float temp = ready?  5 : (float)0.5;
-    if(velocity.x > 0)
-        scale = 1;
-    if (velocity.x <0)
-            scale = -1;
+
     
 
 position.add(velocity.x*temp,velocity.y*temp);
@@ -56,7 +85,7 @@ position.add(velocity.x*temp,velocity.y*temp);
 }
 
 void display(){
-
+changeSprites();
 p.pushMatrix();
     p.translate(position.x,position.y);
     p.scale(scale,1);
@@ -65,29 +94,33 @@ p.pushMatrix();
     frame+= 0.1;
 if(frame> currentImages.size()-1){
     frame=0;
-
-
 }
+
+
+if(attackZones)
+    attackZone.displayAttackZone(damage);
 }
 
 void finishAttack(){
     System.out.println(counter);
-    if(counter >= 50){
+    if(counter >= 60){
         if (continueAttack == false) {
-            ready = true;
             attackZones = false;
-            attackNumber= 0;
-            counter = 0;
+            System.out.println("Bruh");
+            coolDown = 25+attackNumber*10;
+            attackNumber = 0;
             moveAble = true;
-            damage = false;
+
 
         }else{
-            counter = 0;
+
             attackNumber ++;
             continueAttack = false;
-            damage = false;
+
 
         }
+        damage = false;
+        counter = 0;
     }
     else{
         counter ++;
@@ -108,12 +141,11 @@ void finishAttack(){
         if(ready==false){
             if(attackZones) {
 finishAttack();
-            }else{
-
-
-
-            }
-
+            }else if (coolDown <0)
+                ready = true;
+            else
+                coolDown--;
+p.println(coolDown);
 
         }
        // if(AttackZone)
@@ -124,8 +156,7 @@ finishAttack();
 
 void createAttackZone(int attackType){
 //1 = punch
-    AttackZone attackZone = new AttackZone(attackType,p,position,playerWidth,playerHeight);
-    attackZone.displayAttackZone();
+    attackZone = new AttackZone(attackType,p,position,playerWidth,playerHeight,scale);
     attackZones = true;
 
 }
@@ -145,11 +176,11 @@ void controls(char key, int keyCode,  boolean pressed){
                 check = false;
                 ready = false;
                 createAttackZone(1);
-                velocity.set(0,0);
-            } else if( attackNumber<= 5 && continueAttack == false){
+                attackNumber = 1;
+            } else if( attackNumber<= 3 && continueAttack == false){
                 check = false;
                 continueAttack=true;
-                System.out.println("Bruh");
+
             }
             if (pressed == false)
                 check = true;
