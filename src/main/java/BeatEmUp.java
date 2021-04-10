@@ -12,7 +12,7 @@ public class BeatEmUp extends PApplet {
     ImageLoader imgLoad = new ImageLoader(this);
     ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
     Player player = new Player(this,imgLoad);
-    NEnemy nEnemy = new NEnemy(this,new PVector(500,500));
+
     EnemySpawnManager enemySpawnManager;
 
 
@@ -43,7 +43,13 @@ public class BeatEmUp extends PApplet {
             nEnemy.display();
             nEnemy.move(player);
             nEnemy.hit(player);
+            if(nEnemy.dead){
+                enemyList.remove(i);
+                i = i-1;
+            }
         }
+
+        println(enemyList.size());
         enemySpawnManager.spawnEnemy();
 
     }

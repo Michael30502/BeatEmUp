@@ -5,9 +5,11 @@ import java.util.ArrayList;
 
 public class NEnemy extends Collision implements Enemy{
 
-PApplet p;
+
+    PApplet p;
 PVector position = new PVector();
 PVector velocity = new PVector(0,0);
+    boolean dead = false;
 
 ArrayList<AttackZone> attackZoneArrayList = new ArrayList<>();
 
@@ -17,6 +19,7 @@ float sizeX = 50,sizeY=100;
     int health = 100;
     int timer = 30;
     int scale = -1;
+
 
     boolean attackZones = false;
 
@@ -78,7 +81,7 @@ NEnemy(PApplet p,PVector position){
             }
         }
 
-        p.println(health);
+
    //    p.println(collisionBetweenEnemyAndPlayer(s.position.x,s.position.y,s.position.x+s.playerWidth,s.playerHeight,position.x,position.y,sizeX,sizeY));
     position.add(velocity);
 
@@ -97,7 +100,7 @@ NEnemy(PApplet p,PVector position){
             }
         }
         if(health<=0){
-            position.x =5000;
+            dead = true;
         }
     }
 }
