@@ -6,4 +6,6 @@ public interface Enemy {
     void move(Player p);
 
     void hit(Player p);
+
+    void createAttackZone();
 }

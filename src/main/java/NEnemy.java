@@ -1,16 +1,25 @@
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import java.util.ArrayList;
+
 public class NEnemy extends Collision implements Enemy{
 
 PApplet p;
 PVector position = new PVector();
 PVector velocity = new PVector(0,0);
+
+ArrayList<AttackZone> attackZoneArrayList = new ArrayList<>();
+
 float sizeX = 50,sizeY=100;
     float angleRight;
     float angleLeft;
     int health = 100;
     int timer = 30;
+
+    boolean attackZones = false;
+
+
 NEnemy(PApplet p){
     this.p = p;
     position.set(600,600);
@@ -22,6 +31,20 @@ NEnemy(PApplet p){
 
     @Override
     public void attack(Player s) {
+
+    if(velocity.x == 0 && velocity.y == 0&&attackZones){
+        createAttackZone();
+    }
+
+
+
+
+    }
+
+    @Override
+    public void createAttackZone() {
+
+    
 
     }
 

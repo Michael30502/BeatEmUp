@@ -17,9 +17,11 @@ public class AttackZone {
     int scale;
     int zoneWidth = 50;
     int zoneHeight = 50;
-    boolean stand =false;
 
-    AttackZone(int attackType, PApplet p, PVector position,int playerWidth,int playerHeight,int scale ,int stand){
+    boolean stand =false;
+    boolean playerAttackZone;
+
+    AttackZone(int attackType, PApplet p, PVector position,int playerWidth,int playerHeight,int scale ,int stand,boolean playerAttackZone){
     this.attackType = attackType;
     this.p = p;
     this.position = position;
