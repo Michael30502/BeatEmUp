@@ -39,12 +39,18 @@ NEnemy(PApplet p){
             velocity.x = (float) (1 * Math.cos(angleLeft));
             velocity.y = (float) (1 * Math.sin(angleLeft));
         }
-
-        if(collisionBetweenEnemyAndPlayer(s.position.x,s.position.y,s.playerWidth,s.playerHeight,position.x,position.y,sizeX,sizeY)){
-            velocity = new PVector(0,0);
+        if(s.scale==1) {
+            if (collisionBetweenEnemyAndPlayer1(s.position.x, s.position.y, s.playerWidth, s.playerHeight, position.x, position.y, sizeX, sizeY)) {
+                velocity = new PVector(0, 0);
+            }
         }
-        p.println("right"+diffXRight);
-        p.println("left"+diffXLeft);
+        if(s.scale==-1){
+            if (collisionBetweenEnemyAndPlayer2(s.position.x, s.position.y, s.playerWidth, s.playerHeight, position.x, position.y, sizeX, sizeY)) {
+                velocity = new PVector(0, 0);
+            }
+        }
+        p.println("player"+s.position.x);
+        p.println("enemy"+position.x);
    //    p.println(collisionBetweenEnemyAndPlayer(s.position.x,s.position.y,s.position.x+s.playerWidth,s.playerHeight,position.x,position.y,sizeX,sizeY));
     position.add(velocity);
 
