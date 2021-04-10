@@ -172,9 +172,23 @@ void createAttackZone(int attackType,boolean stand){
 }
 
 
-
-
-
+/*
+    public void hit(Enemy s) {
+        timer+=1;
+        for(int i=0; i<s.attackZoneArray.size();i++)
+            if (s.attackZones) {
+                if (collision(s.attackZoneArray.get(i).zonePosition.x, s.attackZoneArray.get(i).zonePosition.y, s.attackZoneArray.get(i).zoneWidth, s.attackZoneArray.get(i).zoneHeight, position.x, position.y, sizeX, sizeY)) {
+                    if (s.damage = true&&timer>=30) {
+                        health -= 20;
+                        timer=0;
+                    }
+                }
+            }
+        if(health<=0){
+            position.x =5000;
+        }
+    }
+*/
 void controls(char key, int keyCode,  boolean pressed){
    velocity.set(0,0);
     if (key != p.CODED)

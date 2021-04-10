@@ -37,7 +37,7 @@ public class BeatEmUp extends PApplet {
         nEnemy.move(player);
         player.draw();
         nEnemy.hit(player);
-
+      //  player.hit();
 
     }
     public void keyPressed(){

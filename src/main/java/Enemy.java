@@ -1,4 +1,9 @@
+import java.util.ArrayList;
+
 public interface Enemy {
+
+    ArrayList<AttackZone> attackZoneArrayList= new ArrayList<>();
+
     void display();
 
     void attack(Player p);

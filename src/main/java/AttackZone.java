@@ -28,7 +28,7 @@ public class AttackZone {
     this.playerWidth = playerWidth;
     this.playerHeight = playerHeight;
     this.scale = scale;
-
+    this.playerAttackZone = playerAttackZone;
     zonePosition.set(position.x+playerWidth*scale,position.y+(playerHeight/5));
     zoneWidth *= scale;
     if(stand ==1)
