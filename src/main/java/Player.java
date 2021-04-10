@@ -75,11 +75,11 @@ void changeSprites() {
 }
 
 void changePosition(){
-    float temp = ready?  5 : (float)0.5;
+
 
     
 
-position.add(velocity.x*temp,velocity.y*temp);
+position.add(velocity.x,velocity.y);
     position.x =p.constrain(position.x,0,p.width-playerWidth);
     position.y=  p.constrain(position.y,0,p.height-playerHeight);
 }
@@ -98,7 +98,7 @@ if(frame> currentImages.size()-1){
 
 
 if(attackZones)
-    attackZone.displayAttackZone(damage);
+    attackZone.displayAttackZone(damage,velocity);
 }
 
 void finishAttack(){
@@ -176,8 +176,8 @@ void controls(char key, int keyCode,  boolean pressed){
                 check = false;
                 ready = false;
                 createAttackZone(1);
-                attackNumber = 1;
-            } else if( attackNumber<= 3 && continueAttack == false){
+                attackNumber = 0;
+            } else if( attackNumber< 2 && continueAttack == false){
                 check = false;
                 continueAttack=true;
 
@@ -259,8 +259,8 @@ else{
     }
 
 //p.println("bruh");
-
-    velocity.set((((right)?1:0) +((left)?-1:0)) ,(((up)?-1:0) +((down)?1:0)));
+    float temp = ready?  5 : (float)0.5;
+    velocity.set(((((right)?1:0) +((left)?-1:0))*temp) ,((((up)?-1:0) +((down)?1:0))*temp));
 }
 
 
