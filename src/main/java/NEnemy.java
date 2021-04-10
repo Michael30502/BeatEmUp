@@ -16,13 +16,13 @@ float sizeX = 50,sizeY=100;
     float angleLeft;
     int health = 100;
     int timer = 30;
+    int scale = -1;
 
     boolean attackZones = false;
 
 
 NEnemy(PApplet p){
     this.p = p;
-    position.set(600,600);
 }
     @Override
     public void display() {
@@ -43,8 +43,8 @@ NEnemy(PApplet p){
 
     @Override
     public void createAttackZone() {
+        attackZoneArrayList.add(new AttackZone(1,p,position,(int)sizeX,(int)sizeY,scale,0,false));
 
-    
 
     }
 
