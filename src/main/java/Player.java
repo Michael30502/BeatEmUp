@@ -1,20 +1,29 @@
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.core.PVector;
+
+import java.util.ArrayList;
 
 import static processing.core.PConstants.*;
 
 public class Player {
 
+ImageLoader imgLoad;
 
 PVector position = new PVector();
 PVector velocity = new PVector();
 
 PApplet p;
-int playerWidth = 50;
-int playerHeight=100;
+
+ArrayList<PImage> currentImages;
+
+int playerWidth = 16*4;
+int playerHeight= 48*4;
 int counter = 0;
 int attackNumber = 0;
-int frame = 0;
+int scale = 1;
+
+float frame = 0;
 
 boolean down,up,left,right = false;
 boolean ready = true;
@@ -25,24 +34,40 @@ boolean moveAble = true;
 boolean check = false;
 
 
-Player(PApplet p){
+Player(PApplet p,ImageLoader imgLoad){
     this.p = p;
 position.set(100,this.p.height/2);
-
+this.imgLoad = imgLoad;
+currentImages = imgLoad.movement;
 }
 
 
 void changePosition(){
     float temp = ready?  5 : (float)0.5;
-    position.add(velocity.x*temp,velocity.y*temp);
+    if(velocity.x > 0)
+        scale = 1;
+    if (velocity.x <0)
+            scale = -1;
+    
+
+position.add(velocity.x*temp,velocity.y*temp);
     position.x =p.constrain(position.x,0,p.width-playerWidth);
     position.y=  p.constrain(position.y,0,p.height-playerHeight);
 }
 
 void display(){
 
-    p.rect(position.x,position.y,playerWidth,playerHeight);
+p.pushMatrix();
+    p.translate(position.x,position.y);
+    p.scale(scale,1);
+    p.image(currentImages.get((int)frame),0,0,playerWidth*2,playerHeight);
+    p.popMatrix();
+    frame+= 0.1;
+if(frame> currentImages.size()-1){
+    frame=0;
 
+
+}
 }
 
 void finishAttack(){
@@ -202,7 +227,8 @@ else{
 
     }
 
-p.println("bruh");
+//p.println("bruh");
+
     velocity.set((((right)?1:0) +((left)?-1:0)) ,(((up)?-1:0) +((down)?1:0)));
 }
 

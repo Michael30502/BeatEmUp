@@ -8,7 +8,8 @@ public class ImageLoader {
     PApplet p;
 
     ArrayList<PImage> punchCombo = new ArrayList<>();
-
+    ArrayList<PImage> movement = new ArrayList<>();
+    ArrayList<PImage> idle = new ArrayList<>();
     ImageLoader(PApplet p){
     this.p = p;
 
@@ -16,12 +17,23 @@ public class ImageLoader {
     }
 
     void loadImage(){
-        for(int i = 1; i < 21;i++) {
+        for(int i = 1; i < 20;i++) {
             punchCombo.add(new PImage());
-            punchCombo.set(i-1,p.loadImage("BasicPunchCombo"+i+".png"));
+            punchCombo.set(i-1,p.loadImage("BasicCombo"+i+".png"));
 
 
         }
+        for(int i = 1; i < 7;i++) {
+            idle.add(new PImage());
+            idle.set(i-1,p.loadImage("idle"+i+".png"));
+
+        }
+        for(int i = 1; i < 5;i++) {
+            movement.add(new PImage());
+            movement.set(i-1,p.loadImage("Walk"+i+".png"));
+
+        }
+
 
 
     }
