@@ -101,14 +101,14 @@ if(frame> currentImages.size()-1){
 
 if(attackZones) {
     for(int i =0;i< attackZoneArray.size();i++) {
-        attackZoneArray.get(i).displayAttackZone(damage, velocity);
+        attackZoneArray.get(i).displayAttackZone(damage, velocity,currentImages,frame);
 
     }
 }
 }
 
 void finishAttack(){
-    System.out.println(counter);
+  //  System.out.println(counter);
     if(counter >= 60){
         if (continueAttack == false) {
             attackZones = false;

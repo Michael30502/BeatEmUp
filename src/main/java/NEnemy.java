@@ -52,7 +52,7 @@ NEnemy(PApplet p){
             }
         }
 
-        p.println(timer);
+        p.println(health);
    //    p.println(collisionBetweenEnemyAndPlayer(s.position.x,s.position.y,s.position.x+s.playerWidth,s.playerHeight,position.x,position.y,sizeX,sizeY));
     position.add(velocity);
 
@@ -70,7 +70,7 @@ NEnemy(PApplet p){
                 }
             }
         }
-        if(health<0){
+        if(health<=0){
             position.x =5000;
         }
     }
