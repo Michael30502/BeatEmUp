@@ -24,6 +24,7 @@ float sizeX = 50,sizeY=100;
 NEnemy(PApplet p,PVector position){
     this.position = position;
     this.p = p;
+
 }
     @Override
     public void display() {
@@ -46,6 +47,7 @@ NEnemy(PApplet p,PVector position){
     public void createAttackZone() {
         attackZoneArrayList.add(new AttackZone(1,p,position,(int)sizeX,(int)sizeY,scale,0,false));
 
+    
 
     }
 

@@ -163,7 +163,7 @@ p.println(coolDown);
 void createAttackZone(int attackType,boolean stand){
 //0 = punch
     for(int i = 0;i< (stand?2:1);i++) {
-        attackZoneArray.add(0, new AttackZone(attackType, p, position, playerWidth, playerHeight, scale,i,false));
+        attackZoneArray.add(0, new AttackZone(attackType, p, position, playerWidth, playerHeight, scale,i));
     }
     attackZones = true;
 
