@@ -1,4 +1,7 @@
 import processing.core.PApplet;
+import processing.core.PVector;
+
+import java.util.ArrayList;
 
 public class BeatEmUp extends PApplet {
 
@@ -7,9 +10,9 @@ public class BeatEmUp extends PApplet {
     }
 
     ImageLoader imgLoad = new ImageLoader(this);
-
+    ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
     Player player = new Player(this,imgLoad);
-    NEnemy nEnemy = new NEnemy(this);
+    NEnemy nEnemy = new NEnemy(this,new PVector(500,500));
 
 
 

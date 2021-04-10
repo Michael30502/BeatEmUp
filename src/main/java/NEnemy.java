@@ -21,7 +21,8 @@ float sizeX = 50,sizeY=100;
     boolean attackZones = false;
 
 
-NEnemy(PApplet p){
+NEnemy(PApplet p,PVector position){
+    this.position = position;
     this.p = p;
 }
     @Override
