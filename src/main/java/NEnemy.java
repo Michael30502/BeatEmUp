@@ -9,6 +9,8 @@ PVector velocity = new PVector(0,0);
 float sizeX = 50,sizeY=100;
     float angleRight;
     float angleLeft;
+    int health = 100;
+    int timer = 30;
 NEnemy(PApplet p){
     this.p = p;
     position.set(600,600);
@@ -49,10 +51,27 @@ NEnemy(PApplet p){
                 velocity = new PVector(0, 0);
             }
         }
-        p.println("player"+s.position.x);
-        p.println("enemy"+position.x);
+
+        p.println(timer);
    //    p.println(collisionBetweenEnemyAndPlayer(s.position.x,s.position.y,s.position.x+s.playerWidth,s.playerHeight,position.x,position.y,sizeX,sizeY));
     position.add(velocity);
 
+    }
+
+    @Override
+    public void hit(Player s) {
+    timer+=1;
+    for(int i=0; i<s.attackZoneArray.size();i++)
+        if (s.attackZones) {
+            if (collision(s.attackZoneArray.get(i).zonePosition.x, s.attackZoneArray.get(i).zonePosition.y, s.attackZoneArray.get(i).zoneWidth, s.attackZoneArray.get(i).zoneHeight, position.x, position.y, sizeX, sizeY)) {
+                if (s.damage = true&&timer>=30) {
+                    health -= 20;
+                    timer=0;
+                }
+            }
+        }
+        if(health<0){
+            position.x =5000;
+        }
     }
 }
