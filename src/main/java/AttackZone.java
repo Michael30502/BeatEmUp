@@ -15,8 +15,9 @@ public class AttackZone {
     int zoneWidth = 50;
     int zoneHeight = 50;
 
+    boolean stand =false;
 
-    AttackZone(int attackType, PApplet p, PVector position,int playerWidth,int playerHeight,int scale ){
+    AttackZone(int attackType, PApplet p, PVector position,int playerWidth,int playerHeight,int scale ,int stand){
     this.attackType = attackType;
     this.p = p;
     this.position = position;
@@ -25,6 +26,8 @@ public class AttackZone {
     this.scale = scale;
     zonePosition.set(position.x+playerWidth*scale,position.y+(playerHeight/5));
     zoneWidth *= scale;
+    if(stand ==1)
+        this.stand =true;
     }
 
     void createAttackZone(){
@@ -36,6 +39,14 @@ public class AttackZone {
     void displayAttackZone(boolean damage,PVector velocity){
 
         zonePosition.add(velocity);
+if(stand){
+    zonePosition.add(velocity);
+    zonePosition.add(velocity);
+    zonePosition.add(velocity);
+    zonePosition.add(velocity);
+    zonePosition.add(velocity);
+    zonePosition.add(velocity);
+}
 
        if(damage)
         p.fill(255,0,0);
