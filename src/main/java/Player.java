@@ -160,10 +160,14 @@ p.println(coolDown);
 
 
 
-void createAttackZone(int attackType){
-//1 = punch
-    attackZoneArray.add(0,new AttackZone(attackType,p,position,playerWidth,playerHeight,scale));
+void createAttackZone(int attackType,boolean stand){
+//0 = punch
+    for(int i = 0;i< (stand?2:1);i++) {
+        attackZoneArray.add(0, new AttackZone(attackType, p, position, playerWidth, playerHeight, scale,i));
+    }
     attackZones = true;
+
+
 
 }
 
@@ -181,7 +185,7 @@ void controls(char key, int keyCode,  boolean pressed){
             if(ready && pressed) {
                 check = false;
                 ready = false;
-                createAttackZone(1);
+                createAttackZone(1,true);
                 attackNumber = 0;
             } else if( attackNumber< 2 && continueAttack == false){
                 check = false;
