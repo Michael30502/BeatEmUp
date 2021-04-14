@@ -43,19 +43,21 @@ public class BeatEmUp extends PApplet {
             nEnemy.display();
             nEnemy.move(player);
             nEnemy.hit(player);
+            nEnemy.attack(player);
+            nEnemy.draw();
           if(nEnemy.angleLeft< ((NEnemy) enemyList.get(i)).angleLeft||nEnemy.angleRight<((NEnemy) enemyList.get(i)).angleRight){
 
 
 
           }
-            println(((NEnemy) enemyList.get(i)).angleLeft);
+            //println(((NEnemy) enemyList.get(i)).angleLeft);
             if(nEnemy.dead){
                 enemyList.remove(i);
                 i = i-1;
             }
         }
 
-        println(enemyList.size());
+        //println(enemyList.size());
         enemySpawnManager.spawnEnemy();
 
     }
@@ -68,9 +70,6 @@ public void keyReleased(){
 
     player.controls(key,keyCode,false);
 
-}
-
-
-}
+}}
 
 

@@ -6,6 +6,10 @@ public interface Enemy {
 
     void display();
 
+    void draw();
+
+    void finishAttack();
+
     void attack(Player p);
 
     void move(Player p);

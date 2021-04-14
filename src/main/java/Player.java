@@ -151,7 +151,7 @@ finishAttack();
                 ready = true;
             else
                 coolDown--;
-p.println(coolDown);
+//p.println(coolDown);
 
         }
        // if(AttackZone)
@@ -199,7 +199,7 @@ void controls(char key, int keyCode,  boolean pressed){
             if(ready && pressed) {
                 check = false;
                 ready = false;
-                createAttackZone(1,true);
+                createAttackZone(1,false);
                 attackNumber = 0;
             } else if( attackNumber< 2 && continueAttack == false){
                 check = false;
