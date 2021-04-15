@@ -18,9 +18,9 @@ public class EnemySpawnManager {
 
             for (int i = 0; i < p.random(5, 50); ++i) {
 
-                if (Math.random() < 0.7) {
-                    float timer = p.random(0, 500);
-                    PVector pos = new PVector(p.random(p.width / 4, p.width - p.width / 4), i * 10);
+                if (Math.random() < 0.3) {
+
+                    PVector pos = new PVector(p.random(p.width /2, p.width ),p.random(p.width-p.width/2,p.width-p.width/4));
                     enemyList.add(new NEnemy(p, pos));
                 }
             }

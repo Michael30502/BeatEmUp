@@ -37,6 +37,9 @@ public class AttackZone {
 
 
 
+
+
+
     void displayAttackZone(boolean damage, PVector velocity, ArrayList<PImage> currentImages,float frame){
     if(stand)
     zoneVelocity.set(velocity.x*6,velocity.y*6);
@@ -58,7 +61,9 @@ p.text("ｽﾀﾝﾄﾞﾎﾟﾜｱ",20,20);
             p.noTint();
             p.popMatrix();
         }
-if(playerAttackZone == true)
+
+if(playerAttackZone == false){
+        System.out.println("Beuh");
         p.rect(zonePosition.x, zonePosition.y,zoneWidth,zoneHeight);
         p.fill(255,255,255);
     }
