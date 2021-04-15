@@ -1,7 +1,7 @@
 public class Collision {
 
     boolean collision(float px, float py, float pw, float ph, float rx, float ry, float rw, float rh) {
-        if (px + pw > rx && px < rx + rw && py + ph > ry && py + ph < ry + rh) {
+        if (px + pw > rx-rw/2 && px < rx + rw/2 && py + ph > ry-rh/2 && py + ph < ry + rh/2) {
             return true;
 
         } else return false;
@@ -10,7 +10,7 @@ public class Collision {
 
     boolean collisionBetweenEnemyAndPlayer1(float px, float py, float pw, float ph, float rx, float ry, float rw, float rh ) {
 
-            if (px <= rx + rw && px > rx + (rw / 2) && py < ry + (rh / 2) && py + ph > ry || px + pw >= rx && rx + (rw / 2) > px + pw && py < ry + (rh / 2) && py + ph > ry) {
+            if (((rx-rw/2 < px+pw/2)&&(rx-rw/2>px-pw/2)&&(ry<py+ph/2)&&(ry>py-ph/2))) {
                 return true;
             }return false;
 

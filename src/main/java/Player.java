@@ -87,6 +87,7 @@ position.add(velocity.x,velocity.y);
 }
 
 void display(){
+    p.imageMode(3);
 changeSprites();
 p.pushMatrix();
     p.translate(position.x,position.y);

@@ -29,7 +29,7 @@ public class AttackZone {
     this.playerHeight = playerHeight;
     this.scale = scale;
     this.playerAttackZone = playerAttackZone;
-    zonePosition.set(position.x+playerWidth*scale,position.y+(playerHeight/5));
+    zonePosition.set(position.x+playerWidth/2*scale,position.y-playerHeight/10);
     zoneWidth *= scale;
     if(stand ==1)
         this.stand =true;
@@ -51,15 +51,15 @@ p.text("ｽﾀﾝﾄﾞﾎﾟﾜｱ",20,20);
         p.rectMode(0);
         if(stand) {
             p.pushMatrix();
-            p.translate(zonePosition.x-zoneWidth, zonePosition.y-zoneHeight);
+            p.translate(zonePosition.x-zoneWidth, zonePosition.y);
             p.scale(scale, 1);
             p.tint(152,92,163);
             p.image(currentImages.get((int) frame), 0, 0, playerWidth * 2, playerHeight);
             p.noTint();
             p.popMatrix();
         }
-
-        //p.rect(zonePosition.x, zonePosition.y,zoneWidth,zoneHeight);
+if(playerAttackZone == true)
+        p.rect(zonePosition.x, zonePosition.y,zoneWidth,zoneHeight);
         p.fill(255,255,255);
     }
 

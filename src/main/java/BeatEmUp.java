@@ -19,6 +19,7 @@ public class BeatEmUp extends PApplet {
     @Override
     public void setup() {
         super.setup();
+
         imgLoad.loadImage();
         enemySpawnManager = new EnemySpawnManager(this, enemyList);
         enemySpawnManager.spawnEnemy();
@@ -43,6 +44,7 @@ public class BeatEmUp extends PApplet {
             nEnemy.display();
             nEnemy.move(player);
             nEnemy.hit(player);
+            nEnemy.attack(player);
         }
         enemySpawnManager.spawnEnemy();
 
