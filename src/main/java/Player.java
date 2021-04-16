@@ -87,6 +87,7 @@ position.add(velocity.x,velocity.y);
 }
 
 void display(){
+    p.imageMode(3);
 changeSprites();
 p.pushMatrix();
     p.translate(position.x,position.y);
@@ -151,11 +152,10 @@ finishAttack();
                 ready = true;
             else
                 coolDown--;
-p.println(coolDown);
+
 
         }
-       // if(AttackZone)
-       // p.rect(position.x+playerWidth,position.y+playerHeight,position.x+attackZonePos.x,position.y,attackZonePos.y);
+
     }
 
 
@@ -199,7 +199,7 @@ void controls(char key, int keyCode,  boolean pressed){
             if(ready && pressed) {
                 check = false;
                 ready = false;
-                createAttackZone(1,true);
+                createAttackZone(1,false);
                 attackNumber = 0;
             } else if( attackNumber< 2 && continueAttack == false){
                 check = false;

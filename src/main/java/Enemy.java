@@ -1,5 +1,3 @@
-import processing.core.PVector;
-
 import java.util.ArrayList;
 
 public interface Enemy {
@@ -7,6 +5,8 @@ public interface Enemy {
     ArrayList<AttackZone> attackZoneArrayList= new ArrayList<>();
 
     void display();
+
+    void finishAttack();
 
     boolean draw();
 

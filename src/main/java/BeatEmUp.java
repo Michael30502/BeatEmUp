@@ -19,6 +19,8 @@ public class BeatEmUp extends PApplet {
     @Override
     public void setup() {
         super.setup();
+
+
         imgLoad.loadImage();
         enemySpawnManager = new EnemySpawnManager(this, enemyList);
         enemySpawnManager.spawnEnemy();
@@ -29,7 +31,7 @@ public class BeatEmUp extends PApplet {
     @Override
     public void settings() {
         super.settings();
-        size(1000,800);
+        size(1000,1000);
     }
 
     @Override
@@ -43,12 +45,13 @@ public class BeatEmUp extends PApplet {
             nEnemy.display();
             ups = false;
             nEnemy.hit(player);
+            nEnemy.attack(player);
         for(int i2 = 0; i2<enemyList.size();++i2 ) {
             if ((nEnemy.getAngle() > enemyList.get(i2).getAngle())) {
                 ups = true;
 
 
-            } 
+            }
 
         }
             println(ups);
@@ -58,12 +61,14 @@ public class BeatEmUp extends PApplet {
 
             if(nEnemy.draw()) {
                 enemyList.remove(i);
-                i = i - 1;
+                i = i-1;
             }
             nEnemy.move(player, ups);
 
 
-        println(enemyList.size());
+
+
+        //println(enemyList.size());
         enemySpawnManager.spawnEnemy();
 
     }}
