@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public abstract class Menu {
     PApplet p;
-    Boolean visible = false ;
+    Boolean visible = false;
     public float size = 1;
     //listen med alle knapperne
 
