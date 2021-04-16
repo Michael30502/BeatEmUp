@@ -1,0 +1,14 @@
+<changelist name="Uncommitted_changes_before_Update_at_10-04-2021_16_50_[Default_Changelist]" date="1618066247916" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10-04-2021_16_50_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 10-04-2021 16:50 [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/NEnemy.class" />
+    <option name="AFTER_PATH" value="target/classes/NEnemy.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10-04-2021_16_50_[Default_Changelist]/NEnemy.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/BeatEmUp.class" />
+    <option name="AFTER_PATH" value="target/classes/BeatEmUp.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10-04-2021_16_50_[Default_Changelist]/BeatEmUp.class" />
+  </binary>
+</changelist>

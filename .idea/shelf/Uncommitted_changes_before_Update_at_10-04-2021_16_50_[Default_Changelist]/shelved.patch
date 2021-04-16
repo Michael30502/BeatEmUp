@@ -1,0 +1,58 @@
+Index: src/main/java/BeatEmUp.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import processing.core.PApplet;\r\n\r\npublic class BeatEmUp extends PApplet {\r\n\r\n    public static void main(String[] args ) {\r\n        PApplet.main(\"BeatEmUp\");\r\n    }\r\n\r\n    ImageLoader imgLoad = new ImageLoader(this);\r\n\r\n    Player player = new Player(this,imgLoad);\r\n    NEnemy nEnemy = new NEnemy(this);\r\n\r\n\r\n\r\n    @Override\r\n    public void setup() {\r\n        super.setup();\r\n        imgLoad.loadImage();\r\n\r\n\r\n    }\r\n\r\n    @Override\r\n    public void settings() {\r\n        super.settings();\r\n        size(1000,1000);\r\n    }\r\n\r\n    @Override\r\n    public void draw() {\r\n        clear();\r\n        nEnemy.display();\r\n        nEnemy.move(player);\r\n        player.draw();\r\n        nEnemy.hit(player);\r\n\r\n\r\n    }\r\n    public void keyPressed(){\r\n\r\n        player.controls(key,keyCode,true);\r\n}\r\n\r\npublic void keyReleased(){\r\n\r\n    player.controls(key,keyCode,false);\r\n\r\n}\r\n\r\n\r\n}\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/BeatEmUp.java	(revision 26a67821271059d55d2674e3f068d8516ba3c5a2)
++++ src/main/java/BeatEmUp.java	(date 1618065686577)
+@@ -1,5 +1,7 @@
+ import processing.core.PApplet;
+ 
++import java.util.ArrayList;
++
+ public class BeatEmUp extends PApplet {
+ 
+     public static void main(String[] args ) {
+@@ -7,7 +9,7 @@
+     }
+ 
+     ImageLoader imgLoad = new ImageLoader(this);
+-
++    ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
+     Player player = new Player(this,imgLoad);
+     NEnemy nEnemy = new NEnemy(this);
+ 
+Index: src/main/java/EnemySpawnManager.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/EnemySpawnManager.java	(date 1618066221762)
++++ src/main/java/EnemySpawnManager.java	(date 1618066221762)
+@@ -0,0 +1,24 @@
++import processing.core.PApplet;
++import processing.core.PVector;
++
++import java.util.ArrayList;
++
++public class EnemySpawnManager {
++
++    PApplet p;
++    ArrayList<Enemy> enemyList;
++
++    EnemySpawnManager(PApplet p, ArrayList<Enemy> enemyList){
++        this.p = p;
++        this.enemyList = enemyList;
++    }
++    void spawnEnemy(){
++        if(enemyList.size() < 2){
++
++            for (int i = 0; i< p.random(5,50);++i){
++
++                if(Math.random() < 0.7) {
++                    float timer = p.random(0,500);
++                    PVector pos =  new PVector(p.random(p.width / 4, p.width - p.width / 4),i*10);
++                    enemyList.add(new NEnemy(p));
++}
