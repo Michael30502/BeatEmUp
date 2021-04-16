@@ -3,75 +3,66 @@ import processing.core.PVector;
 
 import java.util.ArrayList;
 
-public class BeatEmUp extends PApplet {
+    public class BeatEmUp  {
+PApplet p;
 
-    public static void main(String[] args ) {
-        PApplet.main("BeatEmUp");
-    }
+        Boolean visible = true;
+        ImageLoader imgLoad;
+        ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
+       Player player;
 
-    ImageLoader imgLoad = new ImageLoader(this);
-    ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
-    Player player = new Player(this,imgLoad);
+        EnemySpawnManager enemySpawnManager;
+        boolean ups = false;
+        BeatEmUp(PApplet p,ImageLoader imgLoad){
+            this.p = p;
+            this.imgLoad = imgLoad;
+            enemySpawnManager = new EnemySpawnManager(p, enemyList,imgLoad);
+            enemySpawnManager.spawnEnemy();
+             player = new Player(p,imgLoad);
+        }
 
-    EnemySpawnManager enemySpawnManager;
-    boolean ups = false;
-
-    @Override
-    public void setup() {
-        super.setup();
-
-
-        imgLoad.loadImage();
-        enemySpawnManager = new EnemySpawnManager(this, enemyList,imgLoad);
-        enemySpawnManager.spawnEnemy();
+        public void StartUp() {
 
 
-    }
-
-    @Override
-    public void settings() {
-        super.settings();
-        size(1000,1000);
-    }
-
-    @Override
-    public void draw() {
-        clear();
-if (!player.dead)
-        player.draw();
-
-        for(int i = 0; i<enemyList.size();++i ) {
-            Enemy nEnemy =  enemyList.get(i);
-            nEnemy.display();
-            ups = false;
-            player.hit(nEnemy);
-            nEnemy.hit(player);
-            if (!player.dead)
-            nEnemy.attack(player);
-        for(int i2 = 0; i2<enemyList.size();++i2 ) {
-            if ((nEnemy.getAngle() > enemyList.get(i2).getAngle())) {
-                ups = true;
-
-
-            }
 
         }
-            println(ups);
-          println(nEnemy.getAngle());
-            if(i+1<enemyList.size())
-            println(enemyList.get(i+1).getAngle());
-
-            if(nEnemy.draw()) {
-                enemyList.remove(i);
-                i = i-1;
-            }
-            nEnemy.move(player, ups);
 
 
+        public void draw() {
+            p.clear();
+            //  player.hit();
+            player.draw();
+
+            for(int i = 0; i<enemyList.size();++i ) {
+                Enemy nEnemy =  enemyList.get(i);
+                nEnemy.display();
+                ups = false;
+                nEnemy.hit(player);
+                nEnemy.attack(player);
+                for(int i2 = 0; i2<enemyList.size();++i2 ) {
+                    if ((nEnemy.getAngle() > enemyList.get(i2).getAngle())) {
+                        ups = true;
 
 
-        //println(enemyList.size());
-        enemySpawnManager.spawnEnemy();
+                    }
+
+                }
+                p.println(ups);
+                p.println(nEnemy.getAngle());
+                if(i+1<enemyList.size())
+                    p.println(enemyList.get(i+1).getAngle());
+
+                if(nEnemy.draw()) {
+                    enemyList.remove(i);
+                    i = i-1;
+                }
+                nEnemy.move(player, ups);
+
+
+
+
+                //println(enemyList.size());
+                enemySpawnManager.spawnEnemy();
 
     }
 
@@ -83,18 +74,21 @@ if (!player.dead)
             textAlign(LEFT);
         }
     }
-    public void keyPressed(){
 
-        player.controls(key,keyCode,true);
-}
+        public void keyPressed(char key, int keyCode){
 
-public void keyReleased(){
+            player.controls(key,keyCode,true);
+        }
 
-    player.controls(key,keyCode,false);
+        public void keyReleased(char key, int keyCode){
 
-}
+            player.controls(key,keyCode,false);
+
+        }
 
 
-}
+    }
+
+
 
 
