@@ -14,7 +14,7 @@ public class BeatEmUp extends PApplet {
     Player player = new Player(this,imgLoad);
 
     EnemySpawnManager enemySpawnManager;
-
+    boolean ups = false;
 
     @Override
     public void setup() {
@@ -29,7 +29,7 @@ public class BeatEmUp extends PApplet {
     @Override
     public void settings() {
         super.settings();
-        size(1000,1000);
+        size(1000,800);
     }
 
     @Override
@@ -39,26 +39,34 @@ public class BeatEmUp extends PApplet {
         player.draw();
 
         for(int i = 0; i<enemyList.size();++i ) {
-            NEnemy nEnemy = (NEnemy) enemyList.get(i);
+            Enemy nEnemy =  enemyList.get(i);
             nEnemy.display();
-            nEnemy.move(player);
+            ups = false;
             nEnemy.hit(player);
-          if(nEnemy.angleLeft< ((NEnemy) enemyList.get(i)).angleLeft||nEnemy.angleRight<((NEnemy) enemyList.get(i)).angleRight){
+        for(int i2 = 0; i2<enemyList.size();++i2 ) {
+            if ((nEnemy.getAngle() > enemyList.get(i2).getAngle())) {
+                ups = true;
 
 
+            } 
 
-          }
-            println(((NEnemy) enemyList.get(i)).angleLeft);
-            if(nEnemy.dead){
-                enemyList.remove(i);
-                i = i-1;
-            }
         }
+            println(ups);
+          println(nEnemy.getAngle());
+            if(i+1<enemyList.size())
+            println(enemyList.get(i+1).getAngle());
+
+            if(nEnemy.draw()) {
+                enemyList.remove(i);
+                i = i - 1;
+            }
+            nEnemy.move(player, ups);
+
 
         println(enemyList.size());
         enemySpawnManager.spawnEnemy();
 
-    }
+    }}
     public void keyPressed(){
 
         player.controls(key,keyCode,true);
