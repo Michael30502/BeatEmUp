@@ -44,11 +44,13 @@ public class AttackZone {
 
         zonePosition.add(zoneVelocity);
 
-        p.text("ｽﾀﾝﾄﾞﾎﾟﾜｱ", 20, 20);
+
         if (damage)
             p.fill(255, 0, 0);
         p.rectMode(0);
         if (stand) {
+            //Translator note "ｽﾀﾝﾄﾞﾎﾟﾜｱ" means stand power
+            p.text("ｽﾀﾝﾄﾞﾎﾟﾜｱ", 20, 20);
             p.pushMatrix();
             p.translate(zonePosition.x - zoneWidth, zonePosition.y);
             p.scale(scale, 1);

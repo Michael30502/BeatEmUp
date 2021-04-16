@@ -19,4 +19,11 @@ public interface Enemy {
     void createAttackZone();
 
     float getAngle();
+
+    ArrayList<AttackZone> getAttackZoneArray();
+
+    boolean getAttackZones();
+
+    boolean getDamage();
+
 }

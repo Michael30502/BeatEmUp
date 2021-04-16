@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import static processing.core.PConstants.*;
 
-public class Player {
+public class Player extends Collision {
 
 ImageLoader imgLoad;
 
@@ -19,15 +19,20 @@ PApplet p;
 
 ArrayList<PImage> currentImages;
 
+HealthBar healthBar = new HealthBar();
+
 int playerWidth = 16*4;
 int playerHeight= 48*4;
 int counter = 0;
 int attackNumber = 0;
 int scale = 1;
-
+int health = 100;
 float coolDown = 0;
 float frame = 0;
+float timer;
 
+
+boolean dead;
 boolean down,up,left,right = false;
 boolean ready = true;
 boolean attackZones = false;
@@ -87,12 +92,15 @@ position.add(velocity.x,velocity.y);
 }
 
 void display(){
+
+
     p.imageMode(3);
 changeSprites();
 p.pushMatrix();
     p.translate(position.x,position.y);
     p.scale(scale,1);
     p.image(currentImages.get((int)frame),0,0,playerWidth*2,playerHeight);
+    healthBar.displayHealthBar(health,position,playerWidth,p);
     p.popMatrix();
     frame+= 0.1;
 if(frame> currentImages.size()-1){
@@ -172,23 +180,24 @@ void createAttackZone(int attackType,boolean stand){
 }
 
 
-/*
+
     public void hit(Enemy s) {
         timer+=1;
-        for(int i=0; i<s.attackZoneArray.size();i++)
-            if (s.attackZones) {
-                if (collision(s.attackZoneArray.get(i).zonePosition.x, s.attackZoneArray.get(i).zonePosition.y, s.attackZoneArray.get(i).zoneWidth, s.attackZoneArray.get(i).zoneHeight, position.x, position.y, sizeX, sizeY)) {
-                    if (s.damage = true&&timer>=30) {
+
+        for(int i=0; i<s.getAttackZoneArray().size();i++)
+            if (s.getAttackZones()) {
+                if (collision(s.getAttackZoneArray().get(i).zonePosition.x, s.getAttackZoneArray().get(i).zonePosition.y, s.getAttackZoneArray().get(i).zoneWidth, s.getAttackZoneArray().get(i).zoneHeight, position.x, position.y, playerWidth, playerHeight)) {
+                    if (s.getDamage() == true&&timer>=60) {
                         health -= 20;
                         timer=0;
                     }
                 }
             }
         if(health<=0){
-            position.x =5000;
+            dead = true;
         }
     }
-*/
+
 void controls(char key, int keyCode,  boolean pressed){
    velocity.set(0,0);
     if (key != p.CODED)

@@ -37,14 +37,16 @@ public class BeatEmUp extends PApplet {
     @Override
     public void draw() {
         clear();
-      //  player.hit();
+if (!player.dead)
         player.draw();
 
         for(int i = 0; i<enemyList.size();++i ) {
             Enemy nEnemy =  enemyList.get(i);
             nEnemy.display();
             ups = false;
+            player.hit(nEnemy);
             nEnemy.hit(player);
+            if (!player.dead)
             nEnemy.attack(player);
         for(int i2 = 0; i2<enemyList.size();++i2 ) {
             if ((nEnemy.getAngle() > enemyList.get(i2).getAngle())) {
@@ -71,7 +73,16 @@ public class BeatEmUp extends PApplet {
         //println(enemyList.size());
         enemySpawnManager.spawnEnemy();
 
-    }}
+    }
+
+        if (player.dead ){
+            textAlign(CENTER);
+            textSize(70);
+            text("Du er færdig i branchen!", width / 2, height / 2);
+            textSize(12);
+            textAlign(LEFT);
+        }
+    }
     public void keyPressed(){
 
         player.controls(key,keyCode,true);

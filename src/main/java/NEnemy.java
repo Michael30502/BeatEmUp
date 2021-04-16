@@ -19,6 +19,7 @@ ArrayList<AttackZone> attackZoneArray = new ArrayList<>();
 
 ImageLoader imgLoad;
     ArrayList<PImage> currentImages;
+    HealthBar healthBar = new HealthBar();
 
     float sizeX = 16*4,sizeY=48*4;
     float angleRight;
@@ -82,14 +83,15 @@ public boolean draw(){
         p.translate(position.x,position.y);
         p.scale(scale,1);
         System.out.println(currentImages.size());
+        p.tint(255,0,0);
         p.image(currentImages.get((int)frame),0,0,sizeX*2,sizeY);
+        p.noTint();
         frame += 0.2;
 
         if(frame >= currentImages.size())
             frame =0;
-        p.fill(255,255,255);
-        p.rect(0,50,50,50);
 
+        healthBar.displayHealthBar(health,position,sizeX,p);
         p.popMatrix();
         if(attackZoneArray.size()>0)
         for(int i = 0; i< attackZoneArray.size(); i++)
@@ -118,6 +120,7 @@ public boolean draw(){
     public void createAttackZone() {
         attackZoneArray.add(new AttackZone(1,p,position,(int)sizeX,(int)sizeY,scale,0,false));
 attackZones = true;
+attackNumber ++;
 
     }
 
@@ -155,10 +158,11 @@ attackZones = true;
 
 
    //    p.println(collisionBetweenEnemyAndPlayer(s.position.x,s.position.y,s.position.x+s.playerWidth,s.playerHeight,position.x,position.y,sizeX,sizeY));
+  if(!attackZones   ){
     if(velocity.x < 0)
         scale = -1;
     if(velocity.x>0)
-        scale=1;
+        scale=1;}
         position.add(velocity);
 
     }
@@ -167,7 +171,7 @@ attackZones = true;
 
         //  System.out.println(counter);
         if(counter >= 60){
-            if (attackNumber>maxAttacks) {
+            if (attackNumber>=maxAttacks) {
                 attackZones = false;
                 System.out.println("Bruh");
                 coolDown = 25+attackNumber*10;
@@ -198,10 +202,12 @@ attackZones = true;
         @Override
     public void hit(Player s) {
     timer+=1;
+    p.rectMode(p.CENTER);
+    p.rect(position.x-(sizeX/2*scale),position.y,sizeX,sizeY);
     for(int i=0; i<s.attackZoneArray.size();i++)
         if (s.attackZones) {
-            if (collision(s.attackZoneArray.get(i).zonePosition.x, s.attackZoneArray.get(i).zonePosition.y, s.attackZoneArray.get(i).zoneWidth, s.attackZoneArray.get(i).zoneHeight, position.x, position.y, sizeX, sizeY)) {
-                if (s.damage = true&&timer>=30) {
+            if (collision(s.attackZoneArray.get(i).zonePosition.x, s.attackZoneArray.get(i).zonePosition.y, s.attackZoneArray.get(i).zoneWidth, s.attackZoneArray.get(i).zoneHeight, position.x-(sizeX/2*scale), position.y, sizeX, sizeY)) {
+                if (s.damage = true&&timer>=60) {
                     health -= 20;
                     timer=0;
                 }
@@ -210,5 +216,20 @@ attackZones = true;
         if(health<=0){
             dead = true;
         }
+    }
+
+    @Override
+    public boolean getAttackZones() {
+        return attackZones;
+    }
+
+    @Override
+    public boolean getDamage() {
+        return damage;
+    }
+
+    @Override
+    public ArrayList<AttackZone> getAttackZoneArray() {
+        return attackZoneArray;
     }
 }
