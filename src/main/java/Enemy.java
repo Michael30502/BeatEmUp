@@ -1,8 +1,9 @@
+import processing.core.PVector;
+
 import java.util.ArrayList;
 
 public interface Enemy {
 
-    ArrayList<AttackZone> attackZoneArrayList= new ArrayList<>();
 
     void display();
 
@@ -17,4 +18,6 @@ public interface Enemy {
     void hit(Player p);
 
     void createAttackZone();
+
+
 }

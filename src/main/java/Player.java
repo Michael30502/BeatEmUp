@@ -152,11 +152,10 @@ finishAttack();
                 ready = true;
             else
                 coolDown--;
-//p.println(coolDown);
+
 
         }
-       // if(AttackZone)
-       // p.rect(position.x+playerWidth,position.y+playerHeight,position.x+attackZonePos.x,position.y,attackZonePos.y);
+
     }
 
 
