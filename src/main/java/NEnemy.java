@@ -8,12 +8,14 @@ public class NEnemy extends Collision implements Enemy{
 
 
     PApplet p;
-PVector position = new PVector();
+PVector position;
 PVector velocity = new PVector(0,0);
+
+
     boolean dead = false;
 
 ArrayList<AttackZone> attackZoneArray = new ArrayList<>();
-
+    ArrayList<Enemy> enemyList;
 
 ImageLoader imgLoad;
     ArrayList<PImage> currentImages;
@@ -25,6 +27,9 @@ ImageLoader imgLoad;
     int health = 100;
     int timer = 30;
     int scale = -1;
+    float diffXRight;
+    float diffY;
+    float diffXLeft;
     float frame = 0;
     int counter = 0;
     int attackNumber;
@@ -35,6 +40,7 @@ ImageLoader imgLoad;
     boolean ready = true;
     boolean damage = false;
     boolean attackZones = false;
+    float dist = 101;
 
 
 
@@ -46,8 +52,14 @@ NEnemy(PApplet p,PVector position,ImageLoader imgLoad){
     currentImages = imgLoad.movement;
 }
 
-public void draw(){
 
+public float getAngle(){
+    return dist;
+
+
+};
+
+public boolean draw(){
     if(ready==false) {
         if (attackZones) {
             finishAttack();
@@ -56,8 +68,11 @@ public void draw(){
         else
             coolDown--;
     }
-}
+    if(dead)
+        return true;
+    else return false;
 
+}
     @Override
     public void display() {
 
@@ -86,7 +101,7 @@ public void draw(){
     public void attack(Player s) {
 
 
-    if(velocity.x == 0 && velocity.y == 0&&attackZones==false&&ready){
+    if(dist<100 &&attackZones==false&&ready){
         createAttackZone();
         attackZones = true;
         ready = false;
@@ -107,16 +122,16 @@ attackZones = true;
     }
 
     @Override
-    public void move(Player s) {
-		
+    public void move(Player s,boolean ups) {
 
-      float diffXRight = s.position.x+s.playerWidth/2 -position.x;
-      float diffY = s.position.y - position.y;
-      float diffXLeft= s.position.x-s.playerWidth/2 -position.x;
+        angleRight = (float) Math.atan2(diffY, diffXRight);
+        angleLeft = (float) Math.atan2(diffY, diffXLeft);
+       diffXRight = s.position.x+s.playerWidth -position.x;
+       diffY = s.position.y - position.y;
+      diffXLeft= s.position.x -position.x;
+      dist = PVector.dist(position,s.position);
 
 
-      angleRight = (float) Math.atan2(diffY, diffXRight);
-      angleLeft = (float) Math.atan2(diffY, diffXLeft);
         if(angleRight<angleLeft) {
             velocity.x = (float) (1 * Math.cos(angleRight));
             velocity.y = (float) (1 * Math.sin(angleRight));
@@ -125,10 +140,10 @@ attackZones = true;
             velocity.x = (float) (1 * Math.cos(angleLeft));
             velocity.y = (float) (1 * Math.sin(angleLeft));
         }
-
+        if(ups)
+            velocity.set(0,0);
             if(collisionBetweenEnemyAndPlayer1(s.position.x, s.position.y, s.playerWidth+20, s.playerHeight, position.x, position.y, sizeX, sizeY)) {
                 velocity = new PVector(0, 0);
-                p.println("true");
             }
 
         /*

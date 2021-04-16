@@ -1,0 +1,18 @@
+Index: src/main/java/BeatEmUp.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import processing.core.PApplet;\r\nimport processing.core.PVector;\r\n\r\nimport java.util.ArrayList;\r\n\r\npublic class BeatEmUp extends PApplet {\r\n\r\n    public static void main(String[] args ) {\r\n        PApplet.main(\"BeatEmUp\");\r\n    }\r\n\r\n    ImageLoader imgLoad = new ImageLoader(this);\r\n    ArrayList<Enemy> enemyList = new ArrayList<Enemy>();\r\n    Player player = new Player(this,imgLoad);\r\n\r\n    EnemySpawnManager enemySpawnManager;\r\n    boolean ups = false;\r\n\r\n    @Override\r\n    public void setup() {\r\n        super.setup();\r\n        imgLoad.loadImage();\r\n        enemySpawnManager = new EnemySpawnManager(this, enemyList);\r\n        enemySpawnManager.spawnEnemy();\r\n\r\n\r\n    }\r\n\r\n    @Override\r\n    public void settings() {\r\n        super.settings();\r\n        size(1000,800);\r\n    }\r\n\r\n    @Override\r\n    public void draw() {\r\n        clear();\r\n      //  player.hit();\r\n        player.draw();\r\n\r\n        for(int i = 0; i<enemyList.size();++i ) {\r\n            Enemy nEnemy =  enemyList.get(i);\r\n            nEnemy.display();\r\n            ups = false;\r\n            nEnemy.hit(player);\r\n        for(int i2 = 0; i2<enemyList.size();++i2 ) {\r\n            if ((nEnemy.getAngle() > enemyList.get(i2).getAngle())) {\r\n                ups = true;\r\n\r\n\r\n            } \r\n\r\n        }\r\n            println(ups);\r\n          println(nEnemy.getAngle());\r\n            if(i+1<enemyList.size())\r\n            println(enemyList.get(i+1).getAngle());\r\n\r\n            if(nEnemy.draw()) {\r\n                enemyList.remove(i);\r\n                i = i - 1;\r\n            }\r\n            nEnemy.move(player, ups);\r\n\r\n\r\n        println(enemyList.size());\r\n        enemySpawnManager.spawnEnemy();\r\n\r\n    }}\r\n    public void keyPressed(){\r\n\r\n        player.controls(key,keyCode,true);\r\n}\r\n\r\npublic void keyReleased(){\r\n\r\n    player.controls(key,keyCode,false);\r\n\r\n}\r\n\r\n\r\n}\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/BeatEmUp.java	(revision f7655e8d4a926849a4f74bb89f20a3a8aa6ca95a)
++++ src/main/java/BeatEmUp.java	(date 1618587497735)
+@@ -48,7 +48,7 @@
+                 ups = true;
+ 
+ 
+-            } 
++            }
+ 
+         }
+             println(ups);
