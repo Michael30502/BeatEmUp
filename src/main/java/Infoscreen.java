@@ -8,7 +8,7 @@ PApplet p;
         super(p);
         this.p = p;
         visible = false;
-        Button btnBack = new Button(300,200,200,50,"Back",p);
+        Button btnBack = new Button(400,200,200,50,"Back",p);
         btnBack.addAction(new Action() {
             @Override
             public void execute() {
@@ -24,9 +24,13 @@ PApplet p;
 
     @Override
     void draw() {
-        p.text("move on wasd or the arrow keys",450,450);
-        p.text("punch on j, kick on k, and use special move on l",450,500);
-        p.text ("dash on u or spacebar",450,550);
+        p.textSize(15);
+        p.text("move on wasd or the arrow keys",500,300);
+        p.text("punch on j or z, kick on k or x, and use special move on l or c in the end of a combo",500,350);
+        p.text("use your special mode on o or b, if the special bar is full",500,400);
+        p.text ("dash on i or spacebar",500,450);
+        p.text("block attacks on u or v",500,500);
+        p.textSize(12);
 
     }
 

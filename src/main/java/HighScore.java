@@ -12,14 +12,13 @@ public class HighScore extends Menu{
         super(p);
         visible = false;
         this.beatEmUp = beatEmUp;
-        Button btnBack = new Button(300,400,200,50,"Back",p);
+        Button btnBack = new Button(400,200,200,50,"Back",p);
         btnBack.addAction(new Action() {
             @Override
             public void execute() {
                 visible = false;
                 Main.mainMenu.visible = true;
-             //   p.println(Main.mainMenu.visible);
-              //  p.println(visible);
+
             }
         });
         btnList.add(btnBack);
@@ -35,13 +34,13 @@ public class HighScore extends Menu{
         p.textSize(16*size);
         Table s = beatEmUp.scores;
         String header = s.getString(0,0)+ " | " + s.getString(0,1);
-        p.text(header,400,180);
+        p.text(header,500,300);
         for(int i = 0; i<score.length;++i){
             String info = score[i];
-            p.text(info,400 *size,(200+16*i+10)*size);
+            p.text(info,500 *size,(320+16*i+10)*size);
         }
 
-
+        p.textSize(12);
     }
     void calBestScore(){
 

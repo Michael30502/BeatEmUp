@@ -22,9 +22,10 @@ public class Credits extends Menu{
 
     @Override
     void draw() {
-
+        p.textSize(15);
         p.text("Michael Sylvest Bendtsen - Programmerede en del",500,350);
         p.text("Marius Stokkebro - Programmerede også en del",500,400);
+        p.textSize(12);
     }
 
     @Override

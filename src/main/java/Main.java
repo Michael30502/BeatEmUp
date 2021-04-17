@@ -6,20 +6,20 @@ public class Main extends PApplet {
 
 
 
+
     public static void main(String[] args ) {
         PApplet.main("Main");
     }
 
+    public static BeatEmUp beatEmUp;
+    public static MainMenu mainMenu;
+    public static GameEndScreen gameEndScreen;
 
-public static MainMenu mainMenu;
-
-BeatEmUp beatEmUp;
-Infoscreen infoscreen;
-Credits credits;
-HighScore highscore;
-Table scores;
-GameEndScreen gameEndScreen;
-
+    Infoscreen infoscreen;
+    Credits credits;
+    HighScore highscore;
+    Table scores;
+    GameOver gameOver;
     ImageLoader imgLoad = new ImageLoader(this);
 
     @Override
@@ -32,7 +32,7 @@ GameEndScreen gameEndScreen;
         credits = new Credits(this);
         highscore = new HighScore(this,beatEmUp);
         gameEndScreen = new GameEndScreen(this,beatEmUp);
-
+        gameOver = new GameOver(this);
         mainMenu = new MainMenu(this,beatEmUp,infoscreen,credits,highscore);
 
 
@@ -51,17 +51,13 @@ GameEndScreen gameEndScreen;
         if(beatEmUp.visible){
             beatEmUp.draw();
             if(beatEmUp.player.dead){
-
-
-
-                beatEmUp.getScores();
-                beatEmUp.startUp();
+                rectMode(0);
+                gameOver.visible = true;
                 gameEndScreen.calBest = true;
-                gameEndScreen.visible = true;
                 beatEmUp.player.dead = false;
             }
         }
-      //  println(beatEmUp.player.dead);
+
 
 
         mainMenu.display();
@@ -70,6 +66,7 @@ GameEndScreen gameEndScreen;
         highscore.display();
         gameEndScreen.display();
         highscore.calBest = true;
+        gameOver.display();
 
 
     }
@@ -91,6 +88,7 @@ public void keyReleased(){
         credits.mousePressed(mouseX,mouseY);
         highscore.mousePressed(mouseX,mouseY);
         gameEndScreen.mousePressed(mouseX,mouseY);
+        gameOver.mousePressed(mouseX,mouseY);
     }
 
 }
