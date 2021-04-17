@@ -38,6 +38,7 @@ float coolDown = 0;
 float frame = 0;
 float timer;
 int stun =0;
+int parry = 0;
 
 boolean dash = false;
 boolean dead = false;
@@ -208,6 +209,7 @@ void finishAttack(){
         }
         dashCoolDown--;
         stun --;
+        parry --;
         if (stun < 0 )
             stun=0;
         if( specialPower > 100)
@@ -254,6 +256,8 @@ void createAttackZone(int attackType,boolean special){
                                     health -= 10;
                                     stun += 40;
                                     blocking = false;
+                                }else if (parry>0){
+                                s.parry();
                                 }else
                                     health -= 5;
                                 timer = 0;
@@ -265,7 +269,9 @@ void createAttackZone(int attackType,boolean special){
                                     stun += 30;
                                     position.add(-50 * scale, 0);
                                     blocking = false;
-                                }else
+                                }else if (parry>0){
+                                        s.parry();
+                                    }else
                                     health -= 2.5;
                                     timer = 0;
 
@@ -344,8 +350,11 @@ specialPower-=10;
 
         case 'u':{}
         case 'v':{
-            if(!attackZones&&stun<1)
-                 blocking = true;
+            if(!attackZones&&stun<1) {
+                blocking = true;
+                if(parry<=0)
+            parry = 10;
+            }
             if (pressed == false)
                 blocking = false;
         }break;

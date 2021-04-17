@@ -310,6 +310,11 @@ attackNumber ++;
         }
     }
 
+    public void parry(){
+    stun += 50;
+
+    }
+
     @Override
     public void avoid(Player p) {
 
@@ -336,4 +341,6 @@ attackNumber ++;
     public boolean getUnBlockable() {
         return unBlockable;
     }
+
+
 }

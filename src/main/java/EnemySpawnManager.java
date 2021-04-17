@@ -8,7 +8,7 @@ public class EnemySpawnManager {
     PApplet p;
     ArrayList<Enemy> enemyList;
     ImageLoader imgLoad;
-    int wave=2;
+    int wave=1;
     int multipler = 1;
 boolean check = false;
     EnemySpawnManager(PApplet p, ArrayList<Enemy> enemyList,ImageLoader imgLoad) {
