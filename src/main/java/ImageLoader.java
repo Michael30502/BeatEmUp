@@ -15,6 +15,7 @@ public class ImageLoader {
     ArrayList<PImage> movement = new ArrayList<>();
     ArrayList<PImage> idle = new ArrayList<>();
     ArrayList<PImage> stun = new ArrayList<>();
+    ArrayList<PImage> block = new ArrayList<>();
     PImage heart = new PImage();
 
     ImageLoader(PApplet p){
@@ -48,6 +49,15 @@ public class ImageLoader {
             movement.set(i-1,p.loadImage("Walk"+i+".png"));
             movement.get(i-1).resize(characterW, characterH);
         }
+
+        for(int i = 1; i < 5;i++) {
+            block.add(new PImage());
+            block.set(i-1,p.loadImage("Block"+i+".png"));
+            block.get(i-1).resize(characterW, characterH);
+        }
+
+
+
         stun.add(new PImage());
         stun.set(0,p.loadImage("stun.png"));
         stun.get(0).resize(characterW, characterH);

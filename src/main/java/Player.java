@@ -56,6 +56,12 @@ currentImages = imgLoad.movement;
 }
 
 void changeSprites() {
+
+    if(blocking) {
+        if (currentImages != imgLoad.block) {
+        currentImages = imgLoad.block;
+        frame = 0;
+    }}else{
     if(stun>0) {
         currentImages = imgLoad.stun;
         frame = 0;
@@ -96,7 +102,7 @@ void changeSprites() {
                 frame = 0;
             }
         }
-    }
+    }}
 }
 
 void changePosition(){
@@ -114,10 +120,11 @@ void display(){
     infoBar.displaySpecialBar(specialPower,50,120,1,50,"Special Power",122,0,122,p);
     infoBar.displaySpecialBar(health,50,50,1,50,"Health",0,122,0,p);
     p.imageMode(3);
-changeSprites();
-p.pushMatrix();
+    changeSprites();
+    p.pushMatrix();
     p.translate(position.x,position.y);
     p.scale(scale,1);
+    System.out.println(frame);
     p.image(currentImages.get((int)frame),0,0,playerWidth*2,playerHeight);
     p.popMatrix();
     frame+= 0.1;

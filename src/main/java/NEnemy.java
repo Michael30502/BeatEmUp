@@ -62,7 +62,6 @@ public float getAngle(){
 }
 
     public void changeSprites() {
-
     if(stun >0) {
         frame = 0;
         currentImages = imgLoad.stun;
