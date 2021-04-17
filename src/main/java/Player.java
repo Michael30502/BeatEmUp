@@ -27,7 +27,7 @@ int counter = 0;
 int attackNumber = 0;
 int scale = 1;
 int health = 100;
-
+int dashCoolDown =0;
 
 
 float specialPower = 0;
@@ -38,6 +38,7 @@ float frame = 0;
 float timer;
 int stun =0;
 
+boolean dash = false;
 boolean dead = false;
 boolean down,up,left,right = false;
 boolean ready = true;
@@ -108,9 +109,19 @@ void changeSprites() {
 void changePosition(){
 
 
-    
 
-position.add(velocity.x,velocity.y);
+
+    float temp = !ready||blocking?  (float)0.5 :5 ;
+
+
+
+    if(dash) {
+    temp =100;
+    dash = false;
+    }
+    if(stun >0)
+        temp = 0;
+    position.add(velocity.x*temp,velocity.y*temp);
     position.x =p.constrain(position.x,0,p.width-playerWidth);
     position.y=  p.constrain(position.y,0,p.height-playerHeight);
 }
@@ -193,6 +204,7 @@ void finishAttack(){
 
 
         }
+        dashCoolDown--;
         stun --;
         if (stun < 0 )
             stun=0;
@@ -205,7 +217,8 @@ void finishAttack(){
             specialMode= false;
         if(health> 100 )
             health =100;
-    }
+
+}
 
 
 
@@ -309,13 +322,20 @@ specialPower-=10;
 
         case 'u':{}
         case 'v':{
-            if(ready&&stun<1)
+            if(!attackZones&&stun<1)
                  blocking = true;
             if (pressed == false)
                 blocking = false;
         }break;
 
-
+        case'i':{}
+        case' ' :{
+            if (pressed)
+if(!attackZones&&!blocking&&stun<1&&dashCoolDown<0) {
+    dash = true;
+    dashCoolDown = 150;
+}
+        }
 
         case 'o':{
             if(specialPower ==100){
@@ -360,6 +380,9 @@ specialPower-=10;
 else{
     switch (keyCode){
 
+
+
+
         case DOWN: {
             if((pressed) &&(moveAble))
             down=true;
@@ -398,10 +421,10 @@ else{
     }
 
 //p.println("bruh");
-    float temp = !ready||blocking?  (float)0.5 :5 ;
-if(stun >0)
-    temp = 0;
-    velocity.set(((((right)?1:0) +((left)?-1:0))*temp) ,((((up)?-1:0) +((down)?1:0))*temp));
+
+
+
+    velocity.set(((((right)?1:0) +((left)?-1:0))) ,((((up)?-1:0) +((down)?1:0))));
 }
 
 
