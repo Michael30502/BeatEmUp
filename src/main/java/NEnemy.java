@@ -79,10 +79,10 @@ public boolean draw(){
 
 
         p.pushMatrix();
-        p.rectMode(3);
+        p.imageMode(3);
         p.translate(position.x,position.y);
         p.scale(scale,1);
-        System.out.println(currentImages.size());
+        //System.out.println(currentImages.size());
         p.tint(255,0,0);
         p.image(currentImages.get((int)frame),0,0,sizeX*2,sizeY);
         p.noTint();
@@ -173,7 +173,7 @@ attackNumber ++;
         if(counter >= 60){
             if (attackNumber>=maxAttacks) {
                 attackZones = false;
-                System.out.println("Bruh");
+              //  System.out.println("Bruh");
                 coolDown = 25+attackNumber*10;
                 attackNumber = 0;
                 moveAble = true;
@@ -203,7 +203,8 @@ attackNumber ++;
     public void hit(Player s) {
     timer+=1;
     p.rectMode(p.CENTER);
-    p.rect(position.x-(sizeX/2*scale),position.y,sizeX,sizeY);
+  //  p.rect(position.x-(sizeX/2*scale),position.y,sizeX,sizeY);
+         //   p.rect();
     for(int i=0; i<s.attackZoneArray.size();i++)
         if (s.attackZones) {
             if (collision(s.attackZoneArray.get(i).zonePosition.x, s.attackZoneArray.get(i).zonePosition.y, s.attackZoneArray.get(i).zoneWidth, s.attackZoneArray.get(i).zoneHeight, position.x-(sizeX/2*scale), position.y, sizeX, sizeY)) {

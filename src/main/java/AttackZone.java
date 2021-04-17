@@ -12,8 +12,8 @@ public class AttackZone {
     PVector zonePosition = new PVector();
     PVector zoneVelocity = new PVector();
     int attackType;
-    int playerWidth;
-    int playerHeight;
+    int width;
+    int height;
     int scale;
     int zoneWidth = 50;
     int zoneHeight = 50;
@@ -21,16 +21,17 @@ public class AttackZone {
     boolean stand = false;
     boolean playerAttackZone;
 
-    AttackZone(int attackType, PApplet p, PVector position, int playerWidth, int playerHeight, int scale, int stand, boolean playerAttackZone) {
+    AttackZone(int attackType, PApplet p, PVector position, int width, int height, int scale, int stand, boolean playerAttackZone) {
         this.attackType = attackType;
         this.p = p;
         this.position = position;
-        this.playerWidth = playerWidth;
-        this.playerHeight = playerHeight;
+        this.width = width;
+        this.height = height;
         this.scale = scale;
         this.playerAttackZone = playerAttackZone;
-        zonePosition.set(position.x + playerWidth / 3 * scale, position.y - playerHeight / 5);
-        zoneWidth *= scale;
+        zonePosition.set(position.x+scale*width/5, position.y - height / 5);
+if(scale ==-1)
+    zonePosition.x-=zoneWidth;
         if (stand == 1)
             this.stand = true;
     }
@@ -52,16 +53,16 @@ public class AttackZone {
             //Translator note "ｽﾀﾝﾄﾞﾎﾟﾜｱ" means stand power
             p.text("ｽﾀﾝﾄﾞﾎﾟﾜｱ", 20, 20);
             p.pushMatrix();
-            p.translate(zonePosition.x - zoneWidth, zonePosition.y);
+            p.translate(zonePosition.x-20 , zonePosition.y);
             p.scale(scale, 1);
             p.tint(152, 92, 163);
-            p.image(currentImages.get((int) frame), 0, 0, playerWidth * 2, playerHeight);
+            p.image(currentImages.get((int) frame), 0, 0, width * 2, height);
             p.noTint();
             p.popMatrix();
         }
 
 
-
+p.rectMode(0);
             p.rect(zonePosition.x, zonePosition.y, zoneWidth, zoneHeight);
 
 

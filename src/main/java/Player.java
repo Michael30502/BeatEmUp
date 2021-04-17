@@ -32,7 +32,7 @@ float frame = 0;
 float timer;
 
 
-boolean dead;
+boolean dead = false;
 boolean down,up,left,right = false;
 boolean ready = true;
 boolean attackZones = false;
@@ -155,7 +155,7 @@ void finishAttack(){
 
         if(ready==false){
             if(attackZones) {
-finishAttack();
+        finishAttack();
             }else if (coolDown <0)
                 ready = true;
             else
@@ -181,12 +181,16 @@ void createAttackZone(int attackType,boolean stand){
 
 
 
-    public void hit(Enemy s) {
+    public void hit(ArrayList<Enemy> enemyArrayList) {
         timer+=1;
+        p.rectMode(3);
 
+        //p.rect(position.x-(playerWidth/2*scale),position.y,playerWidth,playerHeight);
+        for(int i2=0;i2<enemyArrayList.size();i2++){
+        Enemy s=enemyArrayList.get(i2);
         for(int i=0; i<s.getAttackZoneArray().size();i++)
             if (s.getAttackZones()) {
-                if (collision(s.getAttackZoneArray().get(i).zonePosition.x, s.getAttackZoneArray().get(i).zonePosition.y, s.getAttackZoneArray().get(i).zoneWidth, s.getAttackZoneArray().get(i).zoneHeight, position.x, position.y, playerWidth, playerHeight)) {
+                if (collision(s.getAttackZoneArray().get(i).zonePosition.x, s.getAttackZoneArray().get(i).zonePosition.y, s.getAttackZoneArray().get(i).zoneWidth, s.getAttackZoneArray().get(i).zoneHeight, position.x-(playerWidth/2*scale), position.y, playerWidth, playerHeight)) {
                     if (s.getDamage() == true&&timer>=60) {
                         health -= 20;
                         timer=0;
@@ -196,7 +200,7 @@ void createAttackZone(int attackType,boolean stand){
         if(health<=0){
             dead = true;
         }
-    }
+    }}
 
 void controls(char key, int keyCode,  boolean pressed){
    velocity.set(0,0);
