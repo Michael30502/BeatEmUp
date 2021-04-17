@@ -170,7 +170,7 @@ void finishAttack(){
 
             attackNumber ++;
             if(attackNumber == 2&&specialFinish)
-                attackZoneArray.get(0).stand = true;
+                attackZoneArray.get(0).special = true;
             continueAttack = false;
 
 
@@ -224,9 +224,9 @@ void finishAttack(){
 
 
 
-void createAttackZone(int attackType,boolean stand){
+void createAttackZone(int attackType,boolean special){
 //0 = punch
-    for(int i = 0;i< (stand?2:1);i++) {
+    for(int i = 0;i< (special?2:1);i++) {
         attackZoneArray.add(0, new AttackZone(attackType, p, position, playerWidth, playerHeight, scale,i,true));
     }
     attackZones = true;
@@ -250,25 +250,27 @@ void createAttackZone(int attackType,boolean stand){
                     if (s.getDamage() == true&&timer>=60) {
                         switch( (s.getAttackZoneArray().get(i).attackType)){
                             case 1:{
-                                if(!blocking ||s.getScale() ==scale) {
+                                if(!blocking ||s.getScale() ==scale||s.getUnBlockable()) {
                                     health -= 10;
                                     stun += 40;
+                                    blocking = false;
                                 }else
                                     health -= 5;
                                 timer = 0;
                             }break;
 
                             case 2:{
-                                if(!blocking ||s.getScale() ==scale) {
-                                    health -= 10;
-                                    stun += 40;
-                                    position.add(-50 * scale, 0);
-                                }else{
+                                if(!blocking ||s.getScale() ==scale||s.getUnBlockable()) {
                                     health -= 5;
+                                    stun += 30;
+                                    position.add(-50 * scale, 0);
+                                    blocking = false;
+                                }else
+                                    health -= 2.5;
                                     timer = 0;
-                                }
 
-                            }
+
+                            }break;
 
 
 
@@ -355,8 +357,9 @@ if(!attackZones&&!blocking&&stun<1&&dashCoolDown<0) {
     dash = true;
     dashCoolDown = 150;
 }
-        }
+        }break;
 
+        case 'b':{}
         case 'o':{
             if(specialPower ==100){
                specialMode = true;

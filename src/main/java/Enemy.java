@@ -29,5 +29,6 @@ public interface Enemy {
 
     int getScale();
 
+    boolean getUnBlockable();
 
 }

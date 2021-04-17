@@ -8,7 +8,7 @@ public class NEnemy extends Collision implements Enemy{
 
 
     PApplet p;
-PVector position;
+PVector position = new PVector();
 PVector velocity = new PVector(0,0);
 
 
@@ -42,15 +42,17 @@ ImageLoader imgLoad;
     boolean ready = true;
     boolean damage = false;
     boolean attackZones = false;
+    boolean unBlockable = false;
     float dist = 101;
     int attackMode;
     float rTint,gTint,bTint;
 
 
-NEnemy(PApplet p,PVector position,ImageLoader imgLoad, float speed, int attackMode,float rTint,float gTint, float bTint,int health){
+NEnemy(PApplet p,PVector position,ImageLoader imgLoad, float speed, int attackMode,float rTint,float gTint, float bTint,int health,boolean unBlockable){
     this.speed = speed;
     this.attackMode = attackMode;
-    this.position = position;
+    this.position.x = position.x;
+    this.position.y = position.y;
     this.p = p;
     this.imgLoad = imgLoad;
     this.rTint = rTint;
@@ -58,6 +60,7 @@ NEnemy(PApplet p,PVector position,ImageLoader imgLoad, float speed, int attackMo
     this.bTint = bTint;
     this.health = health;
     this.maxHealth = health;
+    this.unBlockable = unBlockable;
     currentImages = imgLoad.movement;
 }
 
@@ -130,7 +133,7 @@ public boolean draw(){
 
     }
 
-    stun --;
+    stun -=1*speed*0.5;
     if (stun < 0 )
         stun=0;
 
@@ -327,5 +330,10 @@ attackNumber ++;
     @Override
     public ArrayList<AttackZone> getAttackZoneArray() {
         return attackZoneArray;
+    }
+
+    @Override
+    public boolean getUnBlockable() {
+        return unBlockable;
     }
 }
