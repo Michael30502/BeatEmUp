@@ -6,7 +6,7 @@ import java.util.ArrayList;
     public class BeatEmUp  {
 PApplet p;
 
-        Boolean visible = true;
+        Boolean visible = false;
         ImageLoader imgLoad;
         ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
        Player player;

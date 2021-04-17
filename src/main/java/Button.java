@@ -6,8 +6,8 @@ public class Button {
         PApplet p;
 
         //dette er variablerne for x,y postionerne samt knappens høje og brede
-        float x,y,w,h,size = 1;
-        float rX,rY,rW,rh;
+
+        float rX,rY,rW,rH;
         // denne string indholder hvad der skal stå på knappen
         String text;
         //dette er den instieret interface som indholder funktionen
@@ -22,7 +22,7 @@ public class Button {
             this.p = p;
             rX = x;
             rY = y;
-            rh = h;
+            rH = h;
             rW = w;
             this.text = text;
 
@@ -36,11 +36,11 @@ public class Button {
         void  display(){
             p.textAlign(p.CENTER);
             p.fill(btnColor.x,btnColor.y,btnColor.z);
-            p.rect(x,y,w,h);
+            p.rect(rX,rY,rW,rH);
 
 
             p.fill(textColor.x,textColor.y,textColor.z);
-            p.text(text,x + w/8 +p.textWidth(text)/2,y+h/2);
+            p.text(text,rX + rW/8 +p.textWidth(text)/2,rY+rH/2);
         }
 
         void click(float mx, float my){
@@ -48,12 +48,12 @@ public class Button {
             float mouseY = my;
 
 
-            if (mouseX > x &&
-                    mouseX < x + w &&
-                    mouseY > y &&
-                    mouseY < y + h) {
+            if (mouseX > rX &&
+                    mouseX < rX + rW &&
+                    mouseY > rY &&
+                    mouseY <rY + rH) {
 
-
+if(a!= null)
                 a.execute();
 
             }
