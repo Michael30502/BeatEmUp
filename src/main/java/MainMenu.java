@@ -1,13 +1,12 @@
-import processing.core.PApplet;
 public class MainMenu extends Menu {
 
   BeatEmUp beatEmUp;
   Infoscreen infoscreen;
   Credits credits;
-  Highscore highscore;
+  HighScore highscore;
 
 
-         MainMenu(Main p, BeatEmUp beatEmUp,Infoscreen infoscreen,Credits credits,Highscore highscore) {
+         MainMenu(Main p, BeatEmUp beatEmUp, Infoscreen infoscreen, Credits credits, HighScore highscore) {
              super(p);
              this.beatEmUp = beatEmUp;
              this.infoscreen = infoscreen;

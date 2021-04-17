@@ -1,7 +1,6 @@
-import processing.core.PApplet;
-import processing.core.PVector;
 
-import java.util.ArrayList;
+import processing.core.PApplet;
+import processing.data.Table;
 
 public class Main extends PApplet {
 
@@ -17,7 +16,9 @@ public static MainMenu mainMenu;
 BeatEmUp beatEmUp;
 Infoscreen infoscreen;
 Credits credits;
-Highscore highscore;
+HighScore highscore;
+Table scores;
+GameEndScreen gameEndScreen;
 
     ImageLoader imgLoad = new ImageLoader(this);
 
@@ -25,10 +26,13 @@ Highscore highscore;
     public void setup() {
         super.setup();
         imgLoad.loadImage();
+        scores =loadTable("Scores.csv");
         infoscreen = new Infoscreen(this);
-        beatEmUp = new BeatEmUp(this,imgLoad);
+        beatEmUp = new BeatEmUp(this,imgLoad,scores);
         credits = new Credits(this);
-        highscore = new Highscore(this);
+        highscore = new HighScore(this,beatEmUp);
+        gameEndScreen = new GameEndScreen(this,beatEmUp);
+
         mainMenu = new MainMenu(this,beatEmUp,infoscreen,credits,highscore);
 
 
@@ -46,16 +50,29 @@ Highscore highscore;
         background(255);
         if(beatEmUp.visible){
             beatEmUp.draw();
+            if(beatEmUp.player.dead){
+
+
+               beatEmUp.startUp();
+                beatEmUp.getScores();
+                gameEndScreen.calBest = true;
+                gameEndScreen.visible = true;
+                beatEmUp.player.dead = false;
+            }
         }
+        println(beatEmUp.player.dead);
 
 
         mainMenu.display();
         infoscreen.display();
         credits.display();
         highscore.display();
+        gameEndScreen.display();
+        highscore.calBest = true;
 
 
     }
+
     public void keyPressed(){
 
         beatEmUp.keyPressed(key,keyCode);
@@ -72,7 +89,7 @@ public void keyReleased(){
         infoscreen.mousePressed(mouseX,mouseY);
         credits.mousePressed(mouseX,mouseY);
         highscore.mousePressed(mouseX,mouseY);
-
+        gameEndScreen.mousePressed(mouseX,mouseY);
     }
 
 }
