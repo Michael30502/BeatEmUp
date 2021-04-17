@@ -27,9 +27,12 @@ int counter = 0;
 int attackNumber = 0;
 int scale = 1;
 int health = 100;
+
+
+
 float specialPower = 0;
 boolean specialMode = false;
-
+boolean blocking = false;
 float coolDown = 0;
 float frame = 0;
 float timer;
@@ -108,14 +111,14 @@ position.add(velocity.x,velocity.y);
 
 void display(){
 
-infoBar.displaySpecialBar(specialPower,50,50,1,50,"Special Power",p);
+    infoBar.displaySpecialBar(specialPower,50,120,1,50,"Special Power",122,0,122,p);
+    infoBar.displaySpecialBar(health,50,50,1,50,"Health",0,122,0,p);
     p.imageMode(3);
 changeSprites();
 p.pushMatrix();
     p.translate(position.x,position.y);
     p.scale(scale,1);
     p.image(currentImages.get((int)frame),0,0,playerWidth*2,playerHeight);
-    infoBar.displayHealthBar(health,position,playerWidth,p);
     p.popMatrix();
     frame+= 0.1;
 if(frame> currentImages.size()-1){
@@ -223,8 +226,14 @@ void createAttackZone(int attackType,boolean stand){
             if (s.getAttackZones()) {
                 if (collision(s.getAttackZoneArray().get(i).zonePosition.x, s.getAttackZoneArray().get(i).zonePosition.y, s.getAttackZoneArray().get(i).zoneWidth, s.getAttackZoneArray().get(i).zoneHeight, position.x-(playerWidth/2*scale), position.y, playerWidth, playerHeight)) {
                     if (s.getDamage() == true&&timer>=60) {
+                        if(!blocking ||s.getScale() ==scale){
                         health -= 10;
                         stun +=40;
+                        blocking = false;
+                        }
+                        else {
+                            health-=5;
+                        }
                         timer=0;
                     }
                 }
@@ -248,7 +257,7 @@ void controls(char key, int keyCode,  boolean pressed){
         case 'z':{}
         case 'j':{
             if (check)
-            if(ready && pressed&&stun <1) {
+            if(ready && pressed&&stun <1&&!blocking) {
                 check = false;
                 ready = false;
                 createAttackZone(1,specialMode);
@@ -289,6 +298,17 @@ specialPower-=10;
             if (pressed == false)
                 check = true;
         }break;
+
+
+        case 'u':{}
+        case 'v':{
+            if(ready&&stun<1)
+                 blocking = true;
+            if (pressed == false)
+                blocking = false;
+        }break;
+
+
 
         case 'o':{
             if(specialPower ==100){
@@ -371,7 +391,7 @@ else{
     }
 
 //p.println("bruh");
-    float temp = ready?  5 : (float)0.5;
+    float temp = !ready||blocking?  (float)0.5 :5 ;
 if(stun >0)
     temp = 0;
     velocity.set(((((right)?1:0) +((left)?-1:0))*temp) ,((((up)?-1:0) +((down)?1:0))*temp));

@@ -27,4 +27,7 @@ public interface Enemy {
 
     boolean getDamage();
 
+    int getScale();
+
+
 }

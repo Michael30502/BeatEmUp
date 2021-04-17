@@ -56,7 +56,7 @@ if(scale ==-1)
             p.translate(zonePosition.x-20 , zonePosition.y);
             p.scale(scale, 1);
             p.tint(152, 92, 163);
-            p.image(currentImages.get((int) frame), 0, 0, width * 2, height);
+            p.image(currentImages.get((int) frame), 0, 0);
             p.noTint();
             p.popMatrix();
         }

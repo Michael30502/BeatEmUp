@@ -140,7 +140,7 @@ public boolean draw(){
         p.scale(scale,1);
         //System.out.println(currentImages.size());
         p.tint(255,0,0);
-        p.image(currentImages.get((int)frame),0,0,sizeX*2,sizeY);
+        p.image(currentImages.get((int)frame),0,0);
         p.noTint();
         frame += 0.1;
 
@@ -307,6 +307,8 @@ attackNumber ++;
     public boolean getDamage() {
         return damage;
     }
+
+    public int getScale(){return scale;}
 
     @Override
     public ArrayList<AttackZone> getAttackZoneArray() {

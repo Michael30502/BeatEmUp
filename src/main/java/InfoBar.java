@@ -15,11 +15,11 @@ public class InfoBar {
 
     }
 
-    void displaySpecialBar(float specialPower,int x,int y,int width,int height,String text,PApplet p){
+    void displaySpecialBar(float specialPower,int x,int y,int width,int height,String text,int r,int g,int b,PApplet p){
         p.rectMode(0);
         p.fill(0,0,0);
         p.rect(x,y,100*width,height);
-        p.fill(122,0,122);
+        p.fill(r,g,b);
         p.rect(x,y,specialPower*width,height);
         p.fill(255,255,255);
         p.textAlign(3,3);
