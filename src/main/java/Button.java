@@ -16,14 +16,14 @@ public class Button {
         PVector textColor = new PVector(0,0,0);
         PVector btnColor = new PVector(255,255,255);
 
-        Button(float x, float y,float w,float h,String text, PApplet p){
+        Button(float rX, float rY,float rW,float rH,String text, PApplet p){
 
 
             this.p = p;
-            rX = x;
-            rY = y;
-            rH = h;
-            rW = w;
+            this.rX = rX;
+            this.rY = rY;
+            this.rH = rH;
+            this.rW = rW;
             this.text = text;
 
         }

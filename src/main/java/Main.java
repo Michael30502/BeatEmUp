@@ -16,6 +16,8 @@ public static MainMenu mainMenu;
 
 BeatEmUp beatEmUp;
 Infoscreen infoscreen;
+Credits credits;
+Highscore highscore;
 
     ImageLoader imgLoad = new ImageLoader(this);
 
@@ -25,8 +27,9 @@ Infoscreen infoscreen;
         imgLoad.loadImage();
         infoscreen = new Infoscreen(this);
         beatEmUp = new BeatEmUp(this,imgLoad);
-
-        mainMenu = new MainMenu(this,beatEmUp,infoscreen);
+        credits = new Credits(this);
+        highscore = new Highscore(this);
+        mainMenu = new MainMenu(this,beatEmUp,infoscreen,credits,highscore);
 
 
     }
@@ -39,7 +42,8 @@ Infoscreen infoscreen;
 
     @Override
     public void draw() {
-
+        clear();
+        background(255);
         if(beatEmUp.visible){
             beatEmUp.draw();
         }
@@ -47,6 +51,8 @@ Infoscreen infoscreen;
 
         mainMenu.display();
         infoscreen.display();
+        credits.display();
+        highscore.display();
 
 
     }
@@ -64,6 +70,8 @@ public void keyReleased(){
     public void mousePressed() {
         mainMenu.mousePressed(mouseX,mouseY);
         infoscreen.mousePressed(mouseX,mouseY);
+        credits.mousePressed(mouseX,mouseY);
+        highscore.mousePressed(mouseX,mouseY);
 
     }
 

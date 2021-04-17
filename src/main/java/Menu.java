@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public abstract class Menu {
     PApplet p;
-    Boolean visible = false;
+    Boolean visible = true;
     public float size = 1;
     //listen med alle knapperne
 
@@ -15,6 +15,7 @@ public abstract class Menu {
     }
 
     void display(){
+
         if(visible){
             draw();
             if(btnList != null){
@@ -42,11 +43,7 @@ public abstract class Menu {
     abstract void mousePushed();
 
 
-    void keyPressed(char key) {
-        if(visible){
 
-        }
-    }
 
 
 
