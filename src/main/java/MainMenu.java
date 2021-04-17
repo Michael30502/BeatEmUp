@@ -21,8 +21,8 @@ public class MainMenu extends Menu {
                      public void execute() {
                          visible = false;
                          beatEmUp.visible = true;
-                         p.println(visible);
-                         p.println(beatEmUp.visible);
+                        // p.println(visible);
+                        // p.println(beatEmUp.visible);
 
 
                      }
@@ -37,8 +37,8 @@ public class MainMenu extends Menu {
                      public void execute() {
                          visible = false;
                          infoscreen.visible = true;
-                         p.println(visible);
-                         p.println(infoscreen.visible);
+                       //  p.println(visible);
+                       //  p.println(infoscreen.visible);
 
                      }
                  });

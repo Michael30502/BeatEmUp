@@ -63,7 +63,7 @@ if(scale ==-1)
 
 
 p.rectMode(0);
-            p.rect(zonePosition.x, zonePosition.y, zoneWidth, zoneHeight);
+           // p.rect(zonePosition.x, zonePosition.y, zoneWidth, zoneHeight);
 
 
         p.fill(255, 255, 255);

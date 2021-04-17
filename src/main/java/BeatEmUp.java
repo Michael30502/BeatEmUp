@@ -1,6 +1,8 @@
 import processing.core.PApplet;
 import processing.core.PVector;
 
+
+import javax.swing.*;
 import java.util.ArrayList;
 
     public class BeatEmUp  {
@@ -9,7 +11,8 @@ PApplet p;
         Boolean visible = false;
         ImageLoader imgLoad;
         ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
-       Player player;
+        ArrayList<Drops> drops = new ArrayList<>();
+        Player player;
 
         EnemySpawnManager enemySpawnManager;
         boolean ups = false;
@@ -30,16 +33,20 @@ PApplet p;
 
         public void draw() {
             p.clear();
-            System.out.println(player.dead);
+            p.background(0,0,122);
+          //  System.out.println(player.dead);
             if(!player.dead)
             player.draw();
-            player.hit(enemyList);
+            player.hit(enemyList,drops);
+
+            for(int i = 0; i<drops.size();i++)
+                drops.get(i).displayDrops(imgLoad.heart);
 
             for(int i = 0; i<enemyList.size();++i ) {
                 Enemy nEnemy =  enemyList.get(i);
                 nEnemy.display();
                 ups = false;
-                nEnemy.hit(player);
+                nEnemy.hit(player,drops);
                 if(!player.dead)
                 nEnemy.attack(player);
                 for(int i2 = 0; i2<enemyList.size();++i2 ) {

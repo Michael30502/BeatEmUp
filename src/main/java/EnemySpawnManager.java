@@ -16,7 +16,7 @@ public class EnemySpawnManager {
     }
 
     void spawnEnemy() {
-        if (enemyList.size() < 1) {
+        if (enemyList.size() < 2) {
 
             for (int i = 0; i < p.random(5, 50); ++i) {
 

@@ -19,7 +19,7 @@ ArrayList<AttackZone> attackZoneArray = new ArrayList<>();
 
 ImageLoader imgLoad;
     ArrayList<PImage> currentImages;
-    HealthBar healthBar = new HealthBar();
+    InfoBar infoBar = new InfoBar();
 
     float sizeX = 16*4,sizeY=48*4;
     float angleRight;
@@ -36,6 +36,7 @@ ImageLoader imgLoad;
     int attackNumber;
     int coolDown;
     int maxAttacks = 3;
+    int stun =0;
 
     boolean moveAble;
     boolean ready = true;
@@ -58,9 +59,55 @@ public float getAngle(){
     return dist;
 
 
-};
+}
+
+    public void changeSprites() {
+
+    if(stun >0) {
+        frame = 0;
+        currentImages = imgLoad.stun;
+    }
+        else {
+
+        if (velocity.x > 0 && attackZones == false&&stun <1)
+            scale = 1;
+        if (velocity.x < 0 && attackZones == false&&stun <1)
+            scale = -1;
+
+        if (attackZones == true) {
+            switch (attackZoneArray.get(0).attackType) {
+                case 1: {
+                    if (currentImages != imgLoad.punchCombo) {
+                        currentImages = imgLoad.punchCombo;
+                        frame = 0;
+                    }
+
+                }
+                break;
+                case 2: {
+                    frame = 0;
+
+                }
+                break;
+            }
+        } else if (velocity.x == 0 && velocity.y == 0) {
+            if (currentImages != imgLoad.idle) {
+                currentImages = imgLoad.idle;
+                frame = 0;
+            }
+        } else {
+            if (currentImages != imgLoad.movement) {
+                currentImages = imgLoad.movement;
+                frame = 0;
+            }
+        }
+
+
+    }
+    }
 
 public boolean draw(){
+    changeSprites();
     if(ready==false) {
         if (attackZones) {
             finishAttack();
@@ -68,10 +115,19 @@ public boolean draw(){
             ready = true;
         else
             coolDown--;
+
+
+
     }
+
+    stun --;
+    if (stun < 0 )
+        stun=0;
+
     if(dead)
         return true;
     else return false;
+
 
 }
     @Override
@@ -86,12 +142,12 @@ public boolean draw(){
         p.tint(255,0,0);
         p.image(currentImages.get((int)frame),0,0,sizeX*2,sizeY);
         p.noTint();
-        frame += 0.2;
+        frame += 0.1;
 
         if(frame >= currentImages.size())
             frame =0;
 
-        healthBar.displayHealthBar(health,position,sizeX,p);
+        infoBar.displayHealthBar(health,position,sizeX,p);
         p.popMatrix();
         if(attackZoneArray.size()>0)
         for(int i = 0; i< attackZoneArray.size(); i++)
@@ -163,6 +219,8 @@ attackNumber ++;
         scale = -1;
     if(velocity.x>0)
         scale=1;}
+  if(stun>0)
+      velocity.set(0,0);
         position.add(velocity);
 
     }
@@ -170,11 +228,11 @@ attackNumber ++;
     public void finishAttack(){
 
         //  System.out.println(counter);
-        if(counter >= 60){
+        if(counter >= 60||stun>0){
             if (attackNumber>=maxAttacks) {
                 attackZones = false;
               //  System.out.println("Bruh");
-                coolDown = 25+attackNumber*10;
+                coolDown = 50+attackNumber*10;
                 attackNumber = 0;
                 moveAble = true;
                 attackZoneArray.clear();
@@ -200,7 +258,7 @@ attackNumber ++;
 
 
         @Override
-    public void hit(Player s) {
+    public void hit(Player s,ArrayList<Drops> drops) {
     timer+=1;
     p.rectMode(p.CENTER);
   //  p.rect(position.x-(sizeX/2*scale),position.y,sizeX,sizeY);
@@ -209,13 +267,34 @@ attackNumber ++;
         if (s.attackZones) {
             if (collision(s.attackZoneArray.get(i).zonePosition.x, s.attackZoneArray.get(i).zonePosition.y, s.attackZoneArray.get(i).zoneWidth, s.attackZoneArray.get(i).zoneHeight, position.x-(sizeX/2*scale), position.y, sizeX, sizeY)) {
                 if (s.damage = true&&timer>=60) {
-                    health -= 20;
-                    timer=0;
+                    switch( (s.attackZoneArray.get(i).attackType)) {
+
+                        case 1: {
+                            health -= 30;
+                            s.specialPower+=2;
+                            timer = 0;
+                            stun += 60;
+
+
+                        }break;
+
+                        case 2:{
+                            health -= 10;
+                            s.specialPower+=5;
+                            timer = 0;
+                            stun += 50;
+                            position.add(-50*scale,0);
+
+                        }break;
+                    }
                 }
             }
         }
         if(health<=0){
             dead = true;
+            if (p.random(0,101)<20)
+                drops.add(new Drops(position.x,position.y,1,1,0,s));
+
         }
     }
 

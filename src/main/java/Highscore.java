@@ -11,8 +11,8 @@ public class Highscore extends Menu{
             public void execute() {
                 visible = false;
                 Main.mainMenu.visible = true;
-                p.println(Main.mainMenu.visible);
-                p.println(visible);
+             //   p.println(Main.mainMenu.visible);
+             //   p.println(visible);
             }
         });
         btnList.add(btnBack);

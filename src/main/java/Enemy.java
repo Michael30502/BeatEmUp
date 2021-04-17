@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public interface Enemy {
 
 
+    void changeSprites();
 
     void display();
 
@@ -14,7 +15,7 @@ public interface Enemy {
 
     void move(Player p,boolean ups);
 
-    void hit(Player p);
+    void hit(Player p,ArrayList<Drops> drops);
 
     void createAttackZone();
 
