@@ -24,8 +24,8 @@ ImageLoader imgLoad;
     float sizeX = 16*4,sizeY=48*4;
     float angleRight;
     float angleLeft;
-
-    int health = 100;
+    int maxHealth;
+    int health;
     int timer = 30;
     int scale = -1;
     float diffXRight;
@@ -37,25 +37,32 @@ ImageLoader imgLoad;
     int coolDown;
     int maxAttacks = 3;
     int stun =0;
-
+    float speed;
     boolean moveAble;
     boolean ready = true;
     boolean damage = false;
     boolean attackZones = false;
     float dist = 101;
+    int attackMode;
+    float rTint,gTint,bTint;
 
 
-
-NEnemy(PApplet p,PVector position,ImageLoader imgLoad){
-
+NEnemy(PApplet p,PVector position,ImageLoader imgLoad, float speed, int attackMode,float rTint,float gTint, float bTint,int health){
+    this.speed = speed;
+    this.attackMode = attackMode;
     this.position = position;
     this.p = p;
     this.imgLoad = imgLoad;
+    this.rTint = rTint;
+    this.gTint = gTint;
+    this.bTint = bTint;
+    this.health = health;
+    this.maxHealth = health;
     currentImages = imgLoad.movement;
 }
 
 
-public float getAngle(){
+public float getDistance(){
     return dist;
 
 
@@ -84,7 +91,11 @@ public float getAngle(){
                 }
                 break;
                 case 2: {
-                    frame = 0;
+                    if(currentImages != imgLoad.kickCombo){
+                        currentImages = imgLoad.kickCombo;
+                        frame = 0;
+                    }
+
 
                 }
                 break;
@@ -137,8 +148,7 @@ public boolean draw(){
         p.imageMode(3);
         p.translate(position.x,position.y);
         p.scale(scale,1);
-        //System.out.println(currentImages.size());
-        p.tint(255,0,0);
+        p.tint(rTint,gTint,bTint);
         p.image(currentImages.get((int)frame),0,0);
         p.noTint();
         frame += 0.1;
@@ -146,7 +156,7 @@ public boolean draw(){
         if(frame >= currentImages.size())
             frame =0;
 
-        infoBar.displayHealthBar(health,position,sizeX,p);
+        infoBar.displayHealthBar(health,position,sizeX,p,maxHealth);
         p.popMatrix();
         if(attackZoneArray.size()>0)
         for(int i = 0; i< attackZoneArray.size(); i++)
@@ -173,7 +183,7 @@ public boolean draw(){
 
     @Override
     public void createAttackZone() {
-        attackZoneArray.add(new AttackZone(1,p,position,(int)sizeX,(int)sizeY,scale,0,false));
+        attackZoneArray.add(new AttackZone(attackMode,p,position,(int)sizeX,(int)sizeY,scale,0,false));
 attackZones = true;
 attackNumber ++;
 
@@ -191,12 +201,12 @@ attackNumber ++;
 
 
         if(angleRight<angleLeft) {
-            velocity.x = (float) (1 * Math.cos(angleRight));
-            velocity.y = (float) (1 * Math.sin(angleRight));
+            velocity.x = (float) (speed * Math.cos(angleRight));
+            velocity.y = (float) (speed * Math.sin(angleRight));
         }
         if(angleRight>angleLeft) {
-            velocity.x = (float) (1 * Math.cos(angleLeft));
-            velocity.y = (float) (1 * Math.sin(angleLeft));
+            velocity.x = (float) (speed * Math.cos(angleLeft));
+            velocity.y = (float) (speed * Math.sin(angleLeft));
         }
         if(ups)
             velocity.set(0,0);
@@ -295,6 +305,11 @@ attackNumber ++;
                 drops.add(new Drops(position.x,position.y,1,1,0,s));
 
         }
+    }
+
+    @Override
+    public void avoid(Player p) {
+
     }
 
     @Override

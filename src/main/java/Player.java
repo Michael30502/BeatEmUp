@@ -26,6 +26,7 @@ int playerHeight= 48*4;
 int counter = 0;
 int attackNumber = 0;
 int scale = 1;
+int maxHealth = 100;
 int health = 100;
 int dashCoolDown =0;
 
@@ -137,6 +138,7 @@ void display(){
     p.scale(scale,1);
     System.out.println(frame);
     p.image(currentImages.get((int)frame),0,0,playerWidth*2,playerHeight);
+    infoBar.displayHealthBar(health,position,playerWidth,p,maxHealth);
     p.popMatrix();
     frame+= 0.1;
 if(frame> currentImages.size()-1){
@@ -246,15 +248,33 @@ void createAttackZone(int attackType,boolean stand){
             if (s.getAttackZones()) {
                 if (collision(s.getAttackZoneArray().get(i).zonePosition.x, s.getAttackZoneArray().get(i).zonePosition.y, s.getAttackZoneArray().get(i).zoneWidth, s.getAttackZoneArray().get(i).zoneHeight, position.x-(playerWidth/2*scale), position.y, playerWidth, playerHeight)) {
                     if (s.getDamage() == true&&timer>=60) {
-                        if(!blocking ||s.getScale() ==scale){
-                        health -= 10;
-                        stun +=40;
-                        blocking = false;
+                        switch( (s.getAttackZoneArray().get(i).attackType)){
+                            case 1:{
+                                if(!blocking ||s.getScale() ==scale) {
+                                    health -= 10;
+                                    stun += 40;
+                                }else
+                                    health -= 5;
+                                timer = 0;
+                            }break;
+
+                            case 2:{
+                                if(!blocking ||s.getScale() ==scale) {
+                                    health -= 10;
+                                    stun += 40;
+                                    position.add(-50 * scale, 0);
+                                }else{
+                                    health -= 5;
+                                    timer = 0;
+                                }
+
+                            }
+
+
+
                         }
-                        else {
-                            health-=5;
-                        }
-                        timer=0;
+
+
                     }
                 }
             }

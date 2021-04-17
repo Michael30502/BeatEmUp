@@ -7,10 +7,10 @@ public class InfoBar {
 
 
 
-    void displayHealthBar(float health, PVector position, float width, PApplet p){
+    void displayHealthBar(float health, PVector position, float width, PApplet p,float maxHealth){
         p.fill(0,122,0);
         p.rectMode(3);
-        p.rect(0-width/2,100,health,20);
+        p.rect(0-width/2,100,100*health/maxHealth,20);
         p.fill(255,255,255);
 
     }

@@ -56,10 +56,11 @@ PApplet p;
                 nEnemy.display();
                 ups = false;
                 nEnemy.hit(player,drops);
+                nEnemy.avoid(player);
                 if(!player.dead)
                 nEnemy.attack(player);
                 for(int i2 = 0; i2<enemyList.size();++i2 ) {
-                    if ((nEnemy.getAngle() > enemyList.get(i2).getAngle())) {
+                    if ((nEnemy.getDistance() > enemyList.get(i2).getDistance()&&nEnemy.getDistance()<400)) {
                         ups = true;
 
 

@@ -16,10 +16,10 @@ public interface Enemy {
     void move(Player p,boolean ups);
 
     void hit(Player p,ArrayList<Drops> drops);
-
+    void avoid(Player p);
     void createAttackZone();
 
-    float getAngle();
+    float getDistance();
 
     ArrayList<AttackZone> getAttackZoneArray();
 
