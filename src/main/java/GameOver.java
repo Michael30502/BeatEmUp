@@ -39,7 +39,9 @@ public class GameOver extends Menu{
 
     @Override
     void draw() {
-
+        p.textSize(20);
+        p.text("DIN SCORE"+"  "+Main.beatEmUp.gameScore,500,500);
+        p.textSize(12);
     }
 
     @Override
