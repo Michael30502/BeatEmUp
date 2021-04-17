@@ -31,4 +31,6 @@ public interface Enemy {
 
     boolean getUnBlockable();
 
+    void parry();
+
 }
