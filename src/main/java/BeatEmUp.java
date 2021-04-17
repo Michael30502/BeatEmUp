@@ -1,32 +1,40 @@
 import processing.core.PApplet;
-import processing.core.PVector;
+import processing.data.Table;
 
-
-import javax.swing.*;
 import java.util.ArrayList;
 
     public class BeatEmUp  {
 PApplet p;
-
+        TextField textField;
+        Table scores;
         Boolean visible = false;
         ImageLoader imgLoad;
         ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
+       Player player;
+        int gameScore = 0;
         ArrayList<Drops> drops = new ArrayList<>();
         Player player;
 
         EnemySpawnManager enemySpawnManager;
         boolean ups = false;
-        BeatEmUp(PApplet p,ImageLoader imgLoad){
+        BeatEmUp(PApplet p,ImageLoader imgLoad,Table scores){
             this.p = p;
             this.imgLoad = imgLoad;
+            this.scores = scores;
             enemySpawnManager = new EnemySpawnManager(p, enemyList,imgLoad);
             enemySpawnManager.spawnEnemy();
              player = new Player(p,imgLoad);
         }
 
-        public void StartUp() {
-
-
+        public void startUp() {
+            textField = new TextField();
+            visible = false;
+            enemyList.clear();
+            player = new Player(p,imgLoad);
+            enemySpawnManager = new EnemySpawnManager(p, enemyList,imgLoad);
+            enemySpawnManager.spawnEnemy();
+            gameScore = 0;
+            p.rectMode(0);
 
         }
 
@@ -35,6 +43,8 @@ PApplet p;
             p.clear();
             p.background(0,0,122);
           //  System.out.println(player.dead);
+            p.text(gameScore,100,900);
+            System.out.println(player.dead);
             if(!player.dead)
             player.draw();
             player.hit(enemyList,drops);
@@ -74,16 +84,22 @@ PApplet p;
                 enemySpawnManager.spawnEnemy();
 
     }
-            if (player.dead ){
-                p.textAlign(p.CENTER);
-                p.textSize(70);
-                p.text("Du er færdig i branchen!", p.width / 2, p.height / 2);
-                p.textSize(12);
-                p.textAlign(p.LEFT);
-            }
+
 
     }
+    void getScores(){
+        String name = textField.name;
+        String score = String.valueOf(gameScore);
 
+        int rowC = scores.getRowCount();
+        scores.setString(rowC, 0, name);
+        scores.setString(rowC, 1, score);
+
+
+        boolean success = p.saveTable(scores, "/src/main/java/csv/Scores.csv");
+        System.out.println("done: " + success);
+
+    }
         public void keyPressed(char key, int keyCode){
 
             player.controls(key,keyCode,true);
