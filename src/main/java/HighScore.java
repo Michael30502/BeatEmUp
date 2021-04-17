@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class HighScore extends Menu{
-   BeatEmUp beatEmUp;
+    BeatEmUp beatEmUp;
     boolean calBest = false;
     String[] score = {"...","...","...","...","...", "..."};
     HighScore(PApplet p, BeatEmUp beatEmUp) {
@@ -18,8 +18,8 @@ public class HighScore extends Menu{
             public void execute() {
                 visible = false;
                 Main.mainMenu.visible = true;
-                p.println(Main.mainMenu.visible);
-                p.println(visible);
+             //   p.println(Main.mainMenu.visible);
+              //  p.println(visible);
             }
         });
         btnList.add(btnBack);

@@ -53,14 +53,15 @@ GameEndScreen gameEndScreen;
             if(beatEmUp.player.dead){
 
 
-               beatEmUp.startUp();
+
                 beatEmUp.getScores();
+                beatEmUp.startUp();
                 gameEndScreen.calBest = true;
                 gameEndScreen.visible = true;
                 beatEmUp.player.dead = false;
             }
         }
-        println(beatEmUp.player.dead);
+      //  println(beatEmUp.player.dead);
 
 
         mainMenu.display();

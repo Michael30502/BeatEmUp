@@ -13,7 +13,6 @@ PApplet p;
        Player player;
         int gameScore = 0;
         ArrayList<Drops> drops = new ArrayList<>();
-        Player player;
 
         EnemySpawnManager enemySpawnManager;
         boolean ups = false;
@@ -27,13 +26,13 @@ PApplet p;
         }
 
         public void startUp() {
-            textField = new TextField();
+
             visible = false;
             enemyList.clear();
             player = new Player(p,imgLoad);
             enemySpawnManager = new EnemySpawnManager(p, enemyList,imgLoad);
             enemySpawnManager.spawnEnemy();
-            gameScore = 0;
+           gameScore = 0;
             p.rectMode(0);
 
         }
@@ -44,7 +43,7 @@ PApplet p;
             p.background(0,0,122);
           //  System.out.println(player.dead);
             p.text(gameScore,100,900);
-            System.out.println(player.dead);
+        //    System.out.println(player.dead);
             if(!player.dead)
             player.draw();
             player.hit(enemyList,drops);
@@ -74,6 +73,7 @@ PApplet p;
                 if(nEnemy.draw()) {
                     enemyList.remove(i);
                     i = i-1;
+                    gameScore++;
                 }
                 nEnemy.move(player, ups);
 
@@ -88,15 +88,16 @@ PApplet p;
 
     }
     void getScores(){
+        textField = new TextField();
         String name = textField.name;
         String score = String.valueOf(gameScore);
-
+p.println(score);
         int rowC = scores.getRowCount();
         scores.setString(rowC, 0, name);
         scores.setString(rowC, 1, score);
 
 
-        boolean success = p.saveTable(scores, "/src/main/java/csv/Scores.csv");
+        boolean success = p.saveTable(scores, "Scores.csv");
         System.out.println("done: " + success);
 
     }

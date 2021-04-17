@@ -167,7 +167,7 @@ void finishAttack(){
 
     void draw(){
 
-System.out.println(specialFinish);
+//System.out.println(specialFinish);
 
         changePosition();
         display();
