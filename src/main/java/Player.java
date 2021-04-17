@@ -245,7 +245,7 @@ void controls(char key, int keyCode,  boolean pressed){
    velocity.set(0,0);
     if (key != p.CODED)
     switch(key){
-
+        case 'z':{}
         case 'j':{
             if (check)
             if(ready && pressed&&stun <1) {
@@ -260,7 +260,7 @@ void controls(char key, int keyCode,  boolean pressed){
             if (pressed == false)
                 check = true;
         }break;
-
+        case 'x':{}
         case 'k':{
             if (check)
                 if(ready && pressed&&stun <1) {
@@ -275,11 +275,11 @@ void controls(char key, int keyCode,  boolean pressed){
             if (pressed == false)
                 check = true;
         }break;
-
+        case 'c':{}
         case 'l':{
             if (check){
                 check = false;
-            if(attackNumber ==1&&specialPower >10) {
+            if(attackNumber ==1&&specialPower >10&&specialFinish==false) {
                 specialFinish = true;
 specialPower-=10;
                 if (attackNumber < 2 && continueAttack == false)

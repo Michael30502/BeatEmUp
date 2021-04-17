@@ -47,10 +47,11 @@ public class HighScore extends Menu{
 
         ArrayList<Score> bestScores = new ArrayList<>();
         Table s = beatEmUp.scores;
-        for(int i = 2; i<s.getRowCount(); ++i){
+        for(int i = 0; i<s.getRowCount(); ++i){
 
             Score score = new Score(s.getString(i,0),s.getInt(i,1));
             bestScores.add(score);
+
         }
 
         bestScores = scoreBubbleSort(bestScores);
@@ -71,6 +72,7 @@ public class HighScore extends Menu{
     ArrayList<Score> scoreBubbleSort(ArrayList<Score> bestScores) {
         boolean sorted = false;
         int temp;
+        String tempS;
         while(!sorted) {
             sorted = true;
             for (int i = 0; i < bestScores.size() - 1; i++) {
@@ -78,6 +80,10 @@ public class HighScore extends Menu{
                     temp = bestScores.get(i).score;
                     bestScores.get(i).score = bestScores.get(i+1).score;
                     bestScores.get(i+1).score = temp;
+
+                    tempS = bestScores.get(i).name;
+                    bestScores.get(i).name = bestScores.get(i+1).name;
+                    bestScores.get(i+1).name = tempS;
                     sorted = false;
                 }
             }
