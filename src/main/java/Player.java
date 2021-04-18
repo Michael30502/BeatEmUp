@@ -139,7 +139,6 @@ void display(){
     p.scale(scale,1);
     System.out.println(frame);
     p.image(currentImages.get((int)frame),0,0,playerWidth*2,playerHeight);
-    infoBar.displayHealthBar(health,position,playerWidth,p,maxHealth);
     p.popMatrix();
     frame+= 0.1;
 if(frame> currentImages.size()-1){
