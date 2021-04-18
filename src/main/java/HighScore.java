@@ -46,7 +46,7 @@ public class HighScore extends Menu{
 
         ArrayList<Score> bestScores = new ArrayList<>();
         Table s = beatEmUp.scores;
-        for(int i = 0; i<s.getRowCount(); ++i){
+        for(int i = 1; i<s.getRowCount(); ++i){
 
             Score score = new Score(s.getString(i,0),s.getInt(i,1));
             bestScores.add(score);
