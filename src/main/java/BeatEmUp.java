@@ -2,7 +2,7 @@ import processing.core.PApplet;
 import processing.data.Table;
 
 import java.util.ArrayList;
-
+//Står for at lave alt hvad der sker under selve spillet.
     public class BeatEmUp  {
 PApplet p;
         TextField textField;
@@ -26,7 +26,7 @@ PApplet p;
         }
 
         public void startUp() {
-
+//reseter spillet
             visible = false;
             enemyList.clear();
             player = new Player(p,imgLoad);
@@ -39,6 +39,7 @@ PApplet p;
 
 
         public void draw() {
+            //Tegner alt på skærmen når spillet er i gang
             p.clear();
             p.background(0,0,122);
           //  System.out.println(player.dead);
@@ -89,6 +90,7 @@ PApplet p;
 
     }
     void getScores(){
+            //saver scoren fra den omgang af spillet.
         textField = new TextField();
         String name = textField.name;
         String score = String.valueOf(gameScore);

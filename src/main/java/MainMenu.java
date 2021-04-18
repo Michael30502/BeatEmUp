@@ -1,3 +1,4 @@
+//laver main menuen
 public class MainMenu extends Menu {
 
   BeatEmUp beatEmUp;

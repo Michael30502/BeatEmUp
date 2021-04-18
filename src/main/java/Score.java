@@ -1,4 +1,4 @@
-
+// Får information fra csv filen
     public class Score {
         String name;
         int score;

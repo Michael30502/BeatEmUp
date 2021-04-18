@@ -1,6 +1,6 @@
 
 
-
+// laver boksen man skriver sit navn i
 import javax.swing.*;
 public class TextField {
     JFrame f;

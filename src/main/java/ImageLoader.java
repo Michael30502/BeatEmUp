@@ -2,7 +2,7 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 import java.util.ArrayList;
-
+//står for at lave alle spritsne i spillet
 public class ImageLoader {
 
     int characterW = 16*8;

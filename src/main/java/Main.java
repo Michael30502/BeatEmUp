@@ -87,7 +87,7 @@ public void keyReleased(){
         infoscreen.mousePressed(mouseX,mouseY);
         credits.mousePressed(mouseX,mouseY);
         highscore.mousePressed(mouseX,mouseY);
-      
+
         gameOver.mousePressed(mouseX,mouseY);
     }
 

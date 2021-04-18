@@ -5,7 +5,7 @@ import processing.core.PVector;
 import java.util.ArrayList;
 
 import static processing.core.PConstants.*;
-
+//laver spilleren
 public class Player extends Collision {
 
 ImageLoader imgLoad;

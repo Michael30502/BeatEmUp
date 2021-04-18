@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+//står får alle funktionerne alle fjender skal have. Alle fjender implementerer dette interface.
 public interface Enemy {
 
 

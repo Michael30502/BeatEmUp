@@ -2,7 +2,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import java.util.ArrayList;
-
+//Står for at gøre så fjenderne er i spillet
 public class EnemySpawnManager {
 
     PApplet p;
@@ -18,6 +18,8 @@ boolean check = false;
     }
 
     void spawnEnemy() {
+
+        //laver alle fjenderne
         p.println(wave);
 
         if (check)

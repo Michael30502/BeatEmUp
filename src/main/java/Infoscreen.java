@@ -1,5 +1,5 @@
 import processing.core.PApplet;
-
+//Laver infomenuen
 public class Infoscreen extends Menu{
 
 PApplet p;

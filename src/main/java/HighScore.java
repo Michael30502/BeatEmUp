@@ -3,8 +3,9 @@ import processing.data.Table;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
+//Highscore menuen der står for at vise de bedste scorer
 public class HighScore extends Menu{
+
     BeatEmUp beatEmUp;
     boolean calBest = false;
     String[] score = {"...","...","...","...","...", "..."};
@@ -27,6 +28,7 @@ public class HighScore extends Menu{
 
     @Override
     void draw() {
+        //tegner menuen
         if(calBest){
             calBestScore();
             calBest = false;
@@ -43,7 +45,7 @@ public class HighScore extends Menu{
         p.textSize(12);
     }
     void calBestScore(){
-
+// kalkulerer hvilke scores er best
         ArrayList<Score> bestScores = new ArrayList<>();
         Table s = beatEmUp.scores;
         for(int i = 1; i<s.getRowCount(); ++i){
@@ -69,6 +71,7 @@ public class HighScore extends Menu{
     }
 
     ArrayList<Score> scoreBubbleSort(ArrayList<Score> bestScores) {
+    //sorterer scorende så det den bedste der bliver der bliver sat på den rigtige plads
         boolean sorted = false;
         int temp;
         String tempS;

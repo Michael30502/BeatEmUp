@@ -1,18 +1,18 @@
 import processing.core.PApplet;
 import processing.core.PVector;
-
+//står for alt hvad der har med knapperne at gøre
 public class Button {
-    //denne variable indholder pde bibloteket
+
         PApplet p;
 
-        //dette er variablerne for x,y postionerne samt knappens høje og brede
+
 
         float rX,rY,rW,rH;
-        // denne string indholder hvad der skal stå på knappen
+
         String text;
-        //dette er den instieret interface som indholder funktionen
+
         Action a;
-        //dette er farvene
+
         PVector textColor = new PVector(0,0,0);
         PVector btnColor = new PVector(255,255,255);
 

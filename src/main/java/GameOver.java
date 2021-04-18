@@ -1,5 +1,5 @@
 import processing.core.PApplet;
-
+//laver menuen der kommer når du dør
 public class GameOver extends Menu{
 
 

@@ -1,6 +1,6 @@
 import processing.core.PApplet;
 import processing.core.PImage;
-
+//Laver det liv man kan samle op
 public class Drops {
 
     float x,y,width,height,function,widthMult,heightMult;

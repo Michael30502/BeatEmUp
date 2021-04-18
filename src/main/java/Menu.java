@@ -1,7 +1,7 @@
 import processing.core.PApplet;
 
 import java.util.ArrayList;
-
+//Alle menuerne nedarver fra denne klasse
 public abstract class Menu {
     PApplet p;
     Boolean visible = true;

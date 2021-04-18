@@ -1,6 +1,6 @@
 import processing.core.PApplet;
 import processing.core.PVector;
-
+// laver health baren og special move baren
 public class InfoBar {
 
 

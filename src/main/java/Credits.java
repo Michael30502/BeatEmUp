@@ -1,5 +1,5 @@
 import processing.core.PApplet;
-
+//laver credits menuen
 public class Credits extends Menu{
     PApplet p;
     Credits(PApplet p) {

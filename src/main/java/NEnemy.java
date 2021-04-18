@@ -3,7 +3,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import java.util.ArrayList;
-
+//står for at lave fjenderne de andre fjender nedarver fra denne klasse
 public class NEnemy extends Collision implements Enemy{
 
 
