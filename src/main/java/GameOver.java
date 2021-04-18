@@ -13,7 +13,7 @@ public class GameOver extends Menu{
             @Override
             public void execute() {
                 visible = false;
-                Main.gameEndScreen.visible = true;
+                Main.highscore.visible = true;
                 Main.beatEmUp.getScores();
                 Main.beatEmUp.startUp();
             }

@@ -13,11 +13,11 @@ public class Main extends PApplet {
 
     public static BeatEmUp beatEmUp;
     public static MainMenu mainMenu;
-    public static GameEndScreen gameEndScreen;
 
+    public static HighScore highscore;
     Infoscreen infoscreen;
     Credits credits;
-    HighScore highscore;
+
     Table scores;
     GameOver gameOver;
     ImageLoader imgLoad = new ImageLoader(this);
@@ -31,7 +31,7 @@ public class Main extends PApplet {
         beatEmUp = new BeatEmUp(this,imgLoad,scores);
         credits = new Credits(this);
         highscore = new HighScore(this,beatEmUp);
-        gameEndScreen = new GameEndScreen(this,beatEmUp);
+
         gameOver = new GameOver(this);
         mainMenu = new MainMenu(this,beatEmUp,infoscreen,credits,highscore);
 
@@ -53,7 +53,7 @@ public class Main extends PApplet {
             if(beatEmUp.player.dead){
                 rectMode(0);
                 gameOver.visible = true;
-                gameEndScreen.calBest = true;
+                highscore.calBest = true;
                // beatEmUp.player.dead = false;
             }
         }
@@ -64,7 +64,7 @@ public class Main extends PApplet {
         infoscreen.display();
         credits.display();
         highscore.display();
-        gameEndScreen.display();
+
         highscore.calBest = true;
         gameOver.display();
 
@@ -87,7 +87,7 @@ public void keyReleased(){
         infoscreen.mousePressed(mouseX,mouseY);
         credits.mousePressed(mouseX,mouseY);
         highscore.mousePressed(mouseX,mouseY);
-        gameEndScreen.mousePressed(mouseX,mouseY);
+      
         gameOver.mousePressed(mouseX,mouseY);
     }
 

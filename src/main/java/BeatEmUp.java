@@ -42,7 +42,7 @@ PApplet p;
             p.clear();
             p.background(0,0,122);
           //  System.out.println(player.dead);
-            
+
         //    System.out.println(player.dead);
             if(!player.dead)
             player.draw();
