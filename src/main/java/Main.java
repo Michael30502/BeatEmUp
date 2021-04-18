@@ -54,7 +54,7 @@ public class Main extends PApplet {
                 rectMode(0);
                 gameOver.visible = true;
                 gameEndScreen.calBest = true;
-                beatEmUp.player.dead = false;
+               // beatEmUp.player.dead = false;
             }
         }
 

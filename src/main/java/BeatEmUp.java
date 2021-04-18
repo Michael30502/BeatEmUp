@@ -43,7 +43,7 @@ PApplet p;
             p.background(0,0,122);
           //  System.out.println(player.dead);
             p.text(gameScore,100,900);
-        //    System.out.println(player.dead);
+        System.out.println(player.dead);
             if(!player.dead)
             player.draw();
             player.hit(enemyList,drops);
@@ -55,6 +55,7 @@ PApplet p;
                 Enemy nEnemy =  enemyList.get(i);
                 nEnemy.display();
                 ups = false;
+                if(!player.dead)
                 nEnemy.hit(player,drops);
                 nEnemy.avoid(player);
                 if(!player.dead)
@@ -89,6 +90,7 @@ PApplet p;
 
     }
     void getScores(){
+
         textField = new TextField();
         String name = textField.name;
         String score = String.valueOf(gameScore);

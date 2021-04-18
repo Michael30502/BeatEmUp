@@ -124,8 +124,8 @@ void changePosition(){
     if(stun >0)
         temp = 0;
     position.add(velocity.x*temp,velocity.y*temp);
-    position.x =p.constrain(position.x,0,p.width-playerWidth);
-    position.y=  p.constrain(position.y,0,p.height-playerHeight);
+    position.x =p.constrain(position.x,0,p.width-playerWidth/2);
+    position.y=  p.constrain(position.y,0,p.height-playerHeight/2);
 }
 
 void display(){
